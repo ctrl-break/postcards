@@ -1,6 +1,6 @@
 import { UserService } from '@/shared/api/user.service';
 import { VocabularyService } from '@/shared/api/vocabulary.service';
-import { HeaderComponent } from '@/widgets/header';
+import { HeaderComponent } from '../../3-widgets/header';
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, OnInit, inject } from '@angular/core';
 

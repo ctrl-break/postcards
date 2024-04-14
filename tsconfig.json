@@ -23,11 +23,11 @@
       "dom"
     ],
     "paths": {
-      "@/pages/*": ["./src/pages/*"],
-      "@/widgets/*": ["./src/widgets/*"],
-      "@/features/*": ["./src/features/*"],
-      "@/entities/*": ["./src/entities/*"],
-      "@/shared/*": ["./src/shared/*"],
+      "@/pages/*": ["./src/2-pages/*"],
+      "@/widgets/*": ["./src/3-widgets/*"],
+      "@/features/*": ["./src/4-features/*"],
+      "@/entities/*": ["./src/5-entities/*"],
+      "@/shared/*": ["./src/6-shared/*"],
   },
   },
   "angularCompilerOptions": {
