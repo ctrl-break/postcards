@@ -1,18 +1,45 @@
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { httpOptions } from '../constants';
+import { API_AUTH } from '../constants/api';
+import { jwtDecode } from 'jwt-decode';
+import { CookieService } from 'ngx-cookie-service';
 
 @Injectable({
     providedIn: 'root',
 })
 export class AuthService {
-    isLoggedIn = false;
+    constructor(
+        private http: HttpClient,
+        private cookieService: CookieService,
+    ) {}
 
-    constructor() {}
+    setTokensCookie(accessToken: string) {
+        const decodedToken = jwtDecode(accessToken);
+        const expires = new Date(decodedToken.exp! * 1000);
+        this.cookieService.set('accessToken', accessToken, {
+            expires,
+            sameSite: 'Lax',
+        });
+    }
 
-    signin() {
-        this.isLoggedIn = true;
+    signin(email: string, password: string): Observable<{ accessToken: string }> {
+        return this.http.post<{ accessToken: string }>(
+            `${API_AUTH}/login`,
+            { email, password },
+            { ...httpOptions, withCredentials: true },
+        );
     }
 
     logout() {
-        this.isLoggedIn = false;
+        return this.http.get<unknown>(`${API_AUTH}/logout`);
+    }
+
+    refreshToken(): Observable<{ accessToken: string }> {
+        return this.http.get<{ accessToken: string }>(`${API_AUTH}/refresh-tokens`, {
+            ...httpOptions,
+            withCredentials: true,
+        });
     }
 }

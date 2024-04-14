@@ -13,7 +13,6 @@ export const routes: Routes = [
     {
         path: 'main',
         component: MainComponent,
-        canActivate: [() => inject(AuthService).isLoggedIn],
     },
     {
         path: 'signin',
