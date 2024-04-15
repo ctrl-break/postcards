@@ -1,6 +1,6 @@
-import { SigninFormComponent } from '../../3-widgets/signin-form';
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { SigninFormComponent } from '@/widgets/signin-form';
 
 @Component({
     selector: 'app-signin',

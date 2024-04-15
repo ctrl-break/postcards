@@ -1,8 +1,8 @@
-import { UserService } from '@/shared/api/user.service';
-import { VocabularyService } from '@/shared/api/vocabulary.service';
-import { HeaderComponent } from '../../3-widgets/header';
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, OnInit, inject } from '@angular/core';
+import { HeaderComponent } from '@/widgets/header';
+import { UserService } from '@/shared/api/user.service';
+import { VocabularyService } from '@/shared/api/vocabulary.service';
 
 @Component({
     selector: 'app-main',
@@ -21,14 +21,14 @@ export class MainComponent implements OnInit {
             (res) => {
                 console.log(res);
             },
-            (err) => console.error,
+            (err) => console.error(err),
         );
 
         this.vocabularyService.getUserVocabulary().subscribe(
             (res) => {
                 console.log(res);
             },
-            (err) => console.error,
+            (err) => console.error(err),
         );
     }
 }

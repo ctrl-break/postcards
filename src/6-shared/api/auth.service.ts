@@ -1,10 +1,9 @@
-import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
-import { httpOptions } from '../constants';
-import { API_AUTH } from '../constants/api';
+import { Injectable } from '@angular/core';
 import { jwtDecode } from 'jwt-decode';
 import { CookieService } from 'ngx-cookie-service';
+import { Observable } from 'rxjs';
+import { API_AUTH, httpOptions } from '../lib';
 
 @Injectable({
     providedIn: 'root',

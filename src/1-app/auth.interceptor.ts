@@ -1,14 +1,14 @@
-import { AuthService } from '@/shared/api/auth.service';
-import { PATH_AUTH } from '@/shared/constants/api';
 import { HttpInterceptorFn, HttpRequest, HttpHandlerFn, HttpEvent, HttpErrorResponse } from '@angular/common/http';
 import { inject } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
-import { BehaviorSubject, Observable, catchError, delay, filter, of, switchMap, take, tap, throwError } from 'rxjs';
+import { BehaviorSubject, Observable, catchError, filter, switchMap, take, throwError } from 'rxjs';
+import { AuthService } from '@/shared/api/auth.service';
+import { PATH_AUTH } from '@/shared/lib/constants';
 
 let isRefreshing = false;
-const refreshTokenSubject: BehaviorSubject<any> = new BehaviorSubject<any>(null);
+const refreshTokenSubject: BehaviorSubject<string | null> = new BehaviorSubject<string | null>(null);
 
-const addToken = (req: HttpRequest<any>, accessToken: string): HttpRequest<any> =>
+const addToken = (req: HttpRequest<unknown>, accessToken: string): HttpRequest<unknown> =>
     req.clone({
         setHeaders: {
             Authorization: `Bearer ${accessToken}`,
@@ -49,7 +49,7 @@ export const authInterceptor: HttpInterceptorFn = (
                         return throwError(() => 'Refresh token failed');
                     }
                 }),
-                catchError((error) => {
+                catchError(() => {
                     // If refresh token fails, logout user or handle as needed
                     // authService.logout();
                     return throwError(() => 'Refresh token failed');
@@ -60,7 +60,7 @@ export const authInterceptor: HttpInterceptorFn = (
                 filter((token) => token !== null),
                 take(1),
                 switchMap((token) => {
-                    return next(addToken(request, token));
+                    return next(addToken(request, token!));
                 }),
             );
         }

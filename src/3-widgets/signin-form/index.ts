@@ -1,1 +1,1 @@
-export { SigninFormComponent } from './ui/signin-form.component';
+export { SigninFormComponent } from './ui';

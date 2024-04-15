@@ -23,6 +23,7 @@
       "dom"
     ],
     "paths": {
+      "@/app/*": ["./src/1-app/*"],
       "@/pages/*": ["./src/2-pages/*"],
       "@/widgets/*": ["./src/3-widgets/*"],
       "@/features/*": ["./src/4-features/*"],

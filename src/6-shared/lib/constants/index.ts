@@ -1,4 +1,5 @@
-import { env } from '../config/env';
+import { HttpHeaders } from '@angular/common/http';
+import { env } from '../../config/env';
 
 export const API = env.api;
 
@@ -11,3 +12,7 @@ export const API_AUTH = API + PATH_AUTH;
 export const API_PROFILE = API + PATH_PROFILE;
 export const API_USER = API + PATH_USER;
 export const API_WORDS = API + PATH_WORDS;
+
+export const httpOptions = {
+    headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
+};

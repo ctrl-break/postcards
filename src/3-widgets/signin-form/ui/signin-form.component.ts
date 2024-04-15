@@ -1,9 +1,9 @@
-import { AuthService } from '@/shared/api/auth.service';
-import { MatForms } from '../../../6-shared/ui/mat-forms';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { Component, inject } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
+import { AuthService } from '@/shared/api/auth.service';
+import { MatForms } from '@/shared/ui/mat-forms';
 
 @Component({
     selector: 'app-signin-form',
