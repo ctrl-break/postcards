@@ -6,6 +6,7 @@
 /out-tsc
 /bazel-out
 todo.md
+swagger.yaml
 
 # Node
 /node_modules
