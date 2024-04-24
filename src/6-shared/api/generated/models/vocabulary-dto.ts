@@ -3,12 +3,12 @@
 export interface VocabularyDto {
     createdAt: string;
     id: number;
-    imageId: number;
-    meaning: string;
-    transcription: string;
-    translation: string;
+    imageId?: number;
+    meaning?: string;
+    transcription?: string;
+    translation?: string;
     updatedAt: string;
     userId: number;
-    userWord: string;
+    userWord?: string;
     wordId: number;
 }

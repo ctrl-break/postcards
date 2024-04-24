@@ -1,12 +1,12 @@
 /* tslint:disable */
 /* eslint-disable */
 export interface WordUsageDto {
-    grammarRuleId: number;
+    grammarRuleId?: number;
     id: number;
     isVerified: boolean;
     sentence: string;
-    translation: string;
-    userId: number;
-    vocabularyId: number;
-    wordId: number;
+    translation?: string;
+    userId?: number;
+    vocabularyId?: number;
+    wordId?: number;
 }

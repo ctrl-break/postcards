@@ -1,8 +1,8 @@
 /* tslint:disable */
 /* eslint-disable */
 export interface CreateUsageDto {
-    grammarRuleId: number;
+    grammarRuleId?: number;
     sentence: string;
-    translation: string;
+    translation?: string;
     wordId: number;
 }

@@ -1,6 +1,7 @@
 /* tslint:disable */
 /* eslint-disable */
 export interface UpdateCategoryDto {
-    description: string;
-    name: string;
+    description?: string;
+    icon?: string;
+    name?: string;
 }

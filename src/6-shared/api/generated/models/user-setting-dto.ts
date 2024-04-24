@@ -4,7 +4,9 @@ export interface UserSettingDto {
     id: number;
     settingCode: string;
     userId: number;
-    valueBool: boolean;
-    valueInt: number;
-    valueJson: unknown;
+    valueBool?: boolean;
+    valueInt?: number;
+    valueJson?: {
+        [key: string]: any;
+    };
 }

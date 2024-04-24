@@ -2,9 +2,10 @@
 /* eslint-disable */
 export interface CategoryDto {
     createdAt: string;
-    description: string;
+    description?: string;
+    icon?: string;
     id: number;
     name: string;
     updatedAt: string;
-    userId: number;
+    userId?: number;
 }

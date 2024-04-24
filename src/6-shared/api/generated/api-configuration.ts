@@ -1,6 +1,5 @@
 /* tslint:disable */
 /* eslint-disable */
-import { API } from '@/shared/lib';
 import { Injectable } from '@angular/core';
 
 /**
@@ -10,7 +9,7 @@ import { Injectable } from '@angular/core';
     providedIn: 'root',
 })
 export class ApiConfiguration {
-    rootUrl: string = API;
+    rootUrl: string = '';
 }
 
 /**
