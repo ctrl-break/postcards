@@ -9,23 +9,26 @@ import { RequestBuilder } from '../../request-builder';
 import { ImageDto } from '../../models/image-dto';
 
 export interface ImageControllerFindById$Params {
-  id: string;
+    id: string;
 }
 
-export function imageControllerFindById(http: HttpClient, rootUrl: string, params: ImageControllerFindById$Params, context?: HttpContext): Observable<StrictHttpResponse<ImageDto>> {
-  const rb = new RequestBuilder(rootUrl, imageControllerFindById.PATH, 'get');
-  if (params) {
-    rb.path('id', params.id, {});
-  }
+export function imageControllerFindById(
+    http: HttpClient,
+    rootUrl: string,
+    params: ImageControllerFindById$Params,
+    context?: HttpContext,
+): Observable<StrictHttpResponse<ImageDto>> {
+    const rb = new RequestBuilder(rootUrl, imageControllerFindById.PATH, 'get');
+    if (params) {
+        rb.path('id', params.id, {});
+    }
 
-  return http.request(
-    rb.build({ responseType: 'json', accept: 'application/json', context })
-  ).pipe(
-    filter((r: any): r is HttpResponse<any> => r instanceof HttpResponse),
-    map((r: HttpResponse<any>) => {
-      return r as StrictHttpResponse<ImageDto>;
-    })
-  );
+    return http.request(rb.build({ responseType: 'json', accept: 'application/json', context })).pipe(
+        filter((r: any): r is HttpResponse<any> => r instanceof HttpResponse),
+        map((r: HttpResponse<any>) => {
+            return r as StrictHttpResponse<ImageDto>;
+        }),
+    );
 }
 
 imageControllerFindById.PATH = '/api/v1/images/{id}';

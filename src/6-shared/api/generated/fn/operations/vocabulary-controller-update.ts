@@ -10,25 +10,28 @@ import { UpdateVocabularyDto } from '../../models/update-vocabulary-dto';
 import { VocabularyDto } from '../../models/vocabulary-dto';
 
 export interface VocabularyControllerUpdate$Params {
-  id: string;
-      body: UpdateVocabularyDto
+    id: string;
+    body: UpdateVocabularyDto;
 }
 
-export function vocabularyControllerUpdate(http: HttpClient, rootUrl: string, params: VocabularyControllerUpdate$Params, context?: HttpContext): Observable<StrictHttpResponse<VocabularyDto>> {
-  const rb = new RequestBuilder(rootUrl, vocabularyControllerUpdate.PATH, 'put');
-  if (params) {
-    rb.path('id', params.id, {});
-    rb.body(params.body, 'application/json');
-  }
+export function vocabularyControllerUpdate(
+    http: HttpClient,
+    rootUrl: string,
+    params: VocabularyControllerUpdate$Params,
+    context?: HttpContext,
+): Observable<StrictHttpResponse<VocabularyDto>> {
+    const rb = new RequestBuilder(rootUrl, vocabularyControllerUpdate.PATH, 'put');
+    if (params) {
+        rb.path('id', params.id, {});
+        rb.body(params.body, 'application/json');
+    }
 
-  return http.request(
-    rb.build({ responseType: 'json', accept: 'application/json', context })
-  ).pipe(
-    filter((r: any): r is HttpResponse<any> => r instanceof HttpResponse),
-    map((r: HttpResponse<any>) => {
-      return r as StrictHttpResponse<VocabularyDto>;
-    })
-  );
+    return http.request(rb.build({ responseType: 'json', accept: 'application/json', context })).pipe(
+        filter((r: any): r is HttpResponse<any> => r instanceof HttpResponse),
+        map((r: HttpResponse<any>) => {
+            return r as StrictHttpResponse<VocabularyDto>;
+        }),
+    );
 }
 
 vocabularyControllerUpdate.PATH = '/api/v1/words/vocabulary/{id}';

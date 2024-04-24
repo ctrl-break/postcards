@@ -9,23 +9,26 @@ import { RequestBuilder } from '../../request-builder';
 import { VocabularyDto } from '../../models/vocabulary-dto';
 
 export interface VocabularyControllerRemove$Params {
-  id: string;
+    id: string;
 }
 
-export function vocabularyControllerRemove(http: HttpClient, rootUrl: string, params: VocabularyControllerRemove$Params, context?: HttpContext): Observable<StrictHttpResponse<VocabularyDto>> {
-  const rb = new RequestBuilder(rootUrl, vocabularyControllerRemove.PATH, 'delete');
-  if (params) {
-    rb.path('id', params.id, {});
-  }
+export function vocabularyControllerRemove(
+    http: HttpClient,
+    rootUrl: string,
+    params: VocabularyControllerRemove$Params,
+    context?: HttpContext,
+): Observable<StrictHttpResponse<VocabularyDto>> {
+    const rb = new RequestBuilder(rootUrl, vocabularyControllerRemove.PATH, 'delete');
+    if (params) {
+        rb.path('id', params.id, {});
+    }
 
-  return http.request(
-    rb.build({ responseType: 'json', accept: 'application/json', context })
-  ).pipe(
-    filter((r: any): r is HttpResponse<any> => r instanceof HttpResponse),
-    map((r: HttpResponse<any>) => {
-      return r as StrictHttpResponse<VocabularyDto>;
-    })
-  );
+    return http.request(rb.build({ responseType: 'json', accept: 'application/json', context })).pipe(
+        filter((r: any): r is HttpResponse<any> => r instanceof HttpResponse),
+        map((r: HttpResponse<any>) => {
+            return r as StrictHttpResponse<VocabularyDto>;
+        }),
+    );
 }
 
 vocabularyControllerRemove.PATH = '/api/v1/words/vocabulary/{id}';

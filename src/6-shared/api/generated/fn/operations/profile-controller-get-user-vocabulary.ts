@@ -8,22 +8,24 @@ import { RequestBuilder } from '../../request-builder';
 
 import { UserResponse } from '../../models/user-response';
 
-export interface ProfileControllerGetUserVocabulary$Params {
-}
+export interface ProfileControllerGetUserVocabulary$Params {}
 
-export function profileControllerGetUserVocabulary(http: HttpClient, rootUrl: string, params?: ProfileControllerGetUserVocabulary$Params, context?: HttpContext): Observable<StrictHttpResponse<UserResponse>> {
-  const rb = new RequestBuilder(rootUrl, profileControllerGetUserVocabulary.PATH, 'get');
-  if (params) {
-  }
+export function profileControllerGetUserVocabulary(
+    http: HttpClient,
+    rootUrl: string,
+    params?: ProfileControllerGetUserVocabulary$Params,
+    context?: HttpContext,
+): Observable<StrictHttpResponse<UserResponse>> {
+    const rb = new RequestBuilder(rootUrl, profileControllerGetUserVocabulary.PATH, 'get');
+    if (params) {
+    }
 
-  return http.request(
-    rb.build({ responseType: 'json', accept: 'application/json', context })
-  ).pipe(
-    filter((r: any): r is HttpResponse<any> => r instanceof HttpResponse),
-    map((r: HttpResponse<any>) => {
-      return r as StrictHttpResponse<UserResponse>;
-    })
-  );
+    return http.request(rb.build({ responseType: 'json', accept: 'application/json', context })).pipe(
+        filter((r: any): r is HttpResponse<any> => r instanceof HttpResponse),
+        map((r: HttpResponse<any>) => {
+            return r as StrictHttpResponse<UserResponse>;
+        }),
+    );
 }
 
 profileControllerGetUserVocabulary.PATH = '/api/v1/profile';

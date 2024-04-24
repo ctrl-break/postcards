@@ -9,23 +9,26 @@ import { RequestBuilder } from '../../request-builder';
 import { CategoryDto } from '../../models/category-dto';
 
 export interface CategoryControllerFindOne$Params {
-  id: string;
+    id: string;
 }
 
-export function categoryControllerFindOne(http: HttpClient, rootUrl: string, params: CategoryControllerFindOne$Params, context?: HttpContext): Observable<StrictHttpResponse<CategoryDto>> {
-  const rb = new RequestBuilder(rootUrl, categoryControllerFindOne.PATH, 'get');
-  if (params) {
-    rb.path('id', params.id, {});
-  }
+export function categoryControllerFindOne(
+    http: HttpClient,
+    rootUrl: string,
+    params: CategoryControllerFindOne$Params,
+    context?: HttpContext,
+): Observable<StrictHttpResponse<CategoryDto>> {
+    const rb = new RequestBuilder(rootUrl, categoryControllerFindOne.PATH, 'get');
+    if (params) {
+        rb.path('id', params.id, {});
+    }
 
-  return http.request(
-    rb.build({ responseType: 'json', accept: 'application/json', context })
-  ).pipe(
-    filter((r: any): r is HttpResponse<any> => r instanceof HttpResponse),
-    map((r: HttpResponse<any>) => {
-      return r as StrictHttpResponse<CategoryDto>;
-    })
-  );
+    return http.request(rb.build({ responseType: 'json', accept: 'application/json', context })).pipe(
+        filter((r: any): r is HttpResponse<any> => r instanceof HttpResponse),
+        map((r: HttpResponse<any>) => {
+            return r as StrictHttpResponse<CategoryDto>;
+        }),
+    );
 }
 
 categoryControllerFindOne.PATH = '/api/v1/words/category/{id}';

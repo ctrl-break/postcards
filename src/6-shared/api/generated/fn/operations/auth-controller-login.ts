@@ -9,23 +9,26 @@ import { RequestBuilder } from '../../request-builder';
 import { LoginDto } from '../../models/login-dto';
 
 export interface AuthControllerLogin$Params {
-      body: LoginDto
+    body: LoginDto;
 }
 
-export function authControllerLogin(http: HttpClient, rootUrl: string, params: AuthControllerLogin$Params, context?: HttpContext): Observable<StrictHttpResponse<void>> {
-  const rb = new RequestBuilder(rootUrl, authControllerLogin.PATH, 'post');
-  if (params) {
-    rb.body(params.body, 'application/json');
-  }
+export function authControllerLogin(
+    http: HttpClient,
+    rootUrl: string,
+    params: AuthControllerLogin$Params,
+    context?: HttpContext,
+): Observable<StrictHttpResponse<void>> {
+    const rb = new RequestBuilder(rootUrl, authControllerLogin.PATH, 'post');
+    if (params) {
+        rb.body(params.body, 'application/json');
+    }
 
-  return http.request(
-    rb.build({ responseType: 'text', accept: '*/*', context })
-  ).pipe(
-    filter((r: any): r is HttpResponse<any> => r instanceof HttpResponse),
-    map((r: HttpResponse<any>) => {
-      return (r as HttpResponse<any>).clone({ body: undefined }) as StrictHttpResponse<void>;
-    })
-  );
+    return http.request(rb.build({ responseType: 'text', accept: '*/*', context })).pipe(
+        filter((r: any): r is HttpResponse<any> => r instanceof HttpResponse),
+        map((r: HttpResponse<any>) => {
+            return (r as HttpResponse<any>).clone({ body: undefined }) as StrictHttpResponse<void>;
+        }),
+    );
 }
 
 authControllerLogin.PATH = '/api/v1/auth/login';

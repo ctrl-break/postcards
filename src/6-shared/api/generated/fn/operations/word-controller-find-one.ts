@@ -9,23 +9,26 @@ import { RequestBuilder } from '../../request-builder';
 import { WordDto } from '../../models/word-dto';
 
 export interface WordControllerFindOne$Params {
-  id: string;
+    id: string;
 }
 
-export function wordControllerFindOne(http: HttpClient, rootUrl: string, params: WordControllerFindOne$Params, context?: HttpContext): Observable<StrictHttpResponse<WordDto>> {
-  const rb = new RequestBuilder(rootUrl, wordControllerFindOne.PATH, 'get');
-  if (params) {
-    rb.path('id', params.id, {});
-  }
+export function wordControllerFindOne(
+    http: HttpClient,
+    rootUrl: string,
+    params: WordControllerFindOne$Params,
+    context?: HttpContext,
+): Observable<StrictHttpResponse<WordDto>> {
+    const rb = new RequestBuilder(rootUrl, wordControllerFindOne.PATH, 'get');
+    if (params) {
+        rb.path('id', params.id, {});
+    }
 
-  return http.request(
-    rb.build({ responseType: 'json', accept: 'application/json', context })
-  ).pipe(
-    filter((r: any): r is HttpResponse<any> => r instanceof HttpResponse),
-    map((r: HttpResponse<any>) => {
-      return r as StrictHttpResponse<WordDto>;
-    })
-  );
+    return http.request(rb.build({ responseType: 'json', accept: 'application/json', context })).pipe(
+        filter((r: any): r is HttpResponse<any> => r instanceof HttpResponse),
+        map((r: HttpResponse<any>) => {
+            return r as StrictHttpResponse<WordDto>;
+        }),
+    );
 }
 
 wordControllerFindOne.PATH = '/api/v1/words/word/{id}';

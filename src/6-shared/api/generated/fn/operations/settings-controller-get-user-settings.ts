@@ -8,22 +8,24 @@ import { RequestBuilder } from '../../request-builder';
 
 import { UserSettingDto } from '../../models/user-setting-dto';
 
-export interface SettingsControllerGetUserSettings$Params {
-}
+export interface SettingsControllerGetUserSettings$Params {}
 
-export function settingsControllerGetUserSettings(http: HttpClient, rootUrl: string, params?: SettingsControllerGetUserSettings$Params, context?: HttpContext): Observable<StrictHttpResponse<Array<UserSettingDto>>> {
-  const rb = new RequestBuilder(rootUrl, settingsControllerGetUserSettings.PATH, 'get');
-  if (params) {
-  }
+export function settingsControllerGetUserSettings(
+    http: HttpClient,
+    rootUrl: string,
+    params?: SettingsControllerGetUserSettings$Params,
+    context?: HttpContext,
+): Observable<StrictHttpResponse<Array<UserSettingDto>>> {
+    const rb = new RequestBuilder(rootUrl, settingsControllerGetUserSettings.PATH, 'get');
+    if (params) {
+    }
 
-  return http.request(
-    rb.build({ responseType: 'json', accept: 'application/json', context })
-  ).pipe(
-    filter((r: any): r is HttpResponse<any> => r instanceof HttpResponse),
-    map((r: HttpResponse<any>) => {
-      return r as StrictHttpResponse<Array<UserSettingDto>>;
-    })
-  );
+    return http.request(rb.build({ responseType: 'json', accept: 'application/json', context })).pipe(
+        filter((r: any): r is HttpResponse<any> => r instanceof HttpResponse),
+        map((r: HttpResponse<any>) => {
+            return r as StrictHttpResponse<Array<UserSettingDto>>;
+        }),
+    );
 }
 
 settingsControllerGetUserSettings.PATH = '/api/v1/profile/settings';

@@ -10,23 +10,26 @@ import { CreateWordDto } from '../../models/create-word-dto';
 import { WordDto } from '../../models/word-dto';
 
 export interface WordControllerCreate$Params {
-      body: CreateWordDto
+    body: CreateWordDto;
 }
 
-export function wordControllerCreate(http: HttpClient, rootUrl: string, params: WordControllerCreate$Params, context?: HttpContext): Observable<StrictHttpResponse<WordDto>> {
-  const rb = new RequestBuilder(rootUrl, wordControllerCreate.PATH, 'post');
-  if (params) {
-    rb.body(params.body, 'application/json');
-  }
+export function wordControllerCreate(
+    http: HttpClient,
+    rootUrl: string,
+    params: WordControllerCreate$Params,
+    context?: HttpContext,
+): Observable<StrictHttpResponse<WordDto>> {
+    const rb = new RequestBuilder(rootUrl, wordControllerCreate.PATH, 'post');
+    if (params) {
+        rb.body(params.body, 'application/json');
+    }
 
-  return http.request(
-    rb.build({ responseType: 'json', accept: 'application/json', context })
-  ).pipe(
-    filter((r: any): r is HttpResponse<any> => r instanceof HttpResponse),
-    map((r: HttpResponse<any>) => {
-      return r as StrictHttpResponse<WordDto>;
-    })
-  );
+    return http.request(rb.build({ responseType: 'json', accept: 'application/json', context })).pipe(
+        filter((r: any): r is HttpResponse<any> => r instanceof HttpResponse),
+        map((r: HttpResponse<any>) => {
+            return r as StrictHttpResponse<WordDto>;
+        }),
+    );
 }
 
 wordControllerCreate.PATH = '/api/v1/words/word';

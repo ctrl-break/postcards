@@ -10,23 +10,26 @@ import { CategoryDto } from '../../models/category-dto';
 import { CreateCategoryDto } from '../../models/create-category-dto';
 
 export interface CategoryControllerCreate$Params {
-      body: CreateCategoryDto
+    body: CreateCategoryDto;
 }
 
-export function categoryControllerCreate(http: HttpClient, rootUrl: string, params: CategoryControllerCreate$Params, context?: HttpContext): Observable<StrictHttpResponse<CategoryDto>> {
-  const rb = new RequestBuilder(rootUrl, categoryControllerCreate.PATH, 'post');
-  if (params) {
-    rb.body(params.body, 'application/json');
-  }
+export function categoryControllerCreate(
+    http: HttpClient,
+    rootUrl: string,
+    params: CategoryControllerCreate$Params,
+    context?: HttpContext,
+): Observable<StrictHttpResponse<CategoryDto>> {
+    const rb = new RequestBuilder(rootUrl, categoryControllerCreate.PATH, 'post');
+    if (params) {
+        rb.body(params.body, 'application/json');
+    }
 
-  return http.request(
-    rb.build({ responseType: 'json', accept: 'application/json', context })
-  ).pipe(
-    filter((r: any): r is HttpResponse<any> => r instanceof HttpResponse),
-    map((r: HttpResponse<any>) => {
-      return r as StrictHttpResponse<CategoryDto>;
-    })
-  );
+    return http.request(rb.build({ responseType: 'json', accept: 'application/json', context })).pipe(
+        filter((r: any): r is HttpResponse<any> => r instanceof HttpResponse),
+        map((r: HttpResponse<any>) => {
+            return r as StrictHttpResponse<CategoryDto>;
+        }),
+    );
 }
 
 categoryControllerCreate.PATH = '/api/v1/words/category';

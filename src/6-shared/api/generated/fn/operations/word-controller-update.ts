@@ -10,25 +10,28 @@ import { UpdateWordDto } from '../../models/update-word-dto';
 import { WordDto } from '../../models/word-dto';
 
 export interface WordControllerUpdate$Params {
-  id: string;
-      body: UpdateWordDto
+    id: string;
+    body: UpdateWordDto;
 }
 
-export function wordControllerUpdate(http: HttpClient, rootUrl: string, params: WordControllerUpdate$Params, context?: HttpContext): Observable<StrictHttpResponse<WordDto>> {
-  const rb = new RequestBuilder(rootUrl, wordControllerUpdate.PATH, 'put');
-  if (params) {
-    rb.path('id', params.id, {});
-    rb.body(params.body, 'application/json');
-  }
+export function wordControllerUpdate(
+    http: HttpClient,
+    rootUrl: string,
+    params: WordControllerUpdate$Params,
+    context?: HttpContext,
+): Observable<StrictHttpResponse<WordDto>> {
+    const rb = new RequestBuilder(rootUrl, wordControllerUpdate.PATH, 'put');
+    if (params) {
+        rb.path('id', params.id, {});
+        rb.body(params.body, 'application/json');
+    }
 
-  return http.request(
-    rb.build({ responseType: 'json', accept: 'application/json', context })
-  ).pipe(
-    filter((r: any): r is HttpResponse<any> => r instanceof HttpResponse),
-    map((r: HttpResponse<any>) => {
-      return r as StrictHttpResponse<WordDto>;
-    })
-  );
+    return http.request(rb.build({ responseType: 'json', accept: 'application/json', context })).pipe(
+        filter((r: any): r is HttpResponse<any> => r instanceof HttpResponse),
+        map((r: HttpResponse<any>) => {
+            return r as StrictHttpResponse<WordDto>;
+        }),
+    );
 }
 
 wordControllerUpdate.PATH = '/api/v1/words/word/{id}';
