@@ -25,9 +25,5 @@ export class MainComponent implements OnInit {
         this.apiService.vocabularyControllerGetUserVocabulary().subscribe((res) => {
             console.log(res);
         });
-
-        this.apiService.categoryControllerFindBasicCategories({}).subscribe((res) => {
-            console.log(res);
-        });
     }
 }
