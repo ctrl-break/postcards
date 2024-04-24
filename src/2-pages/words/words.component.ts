@@ -1,11 +1,11 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { CategoryListComponent } from '@/widgets/category-list';
+import { WordsListComponent } from '@/widgets/words-list';
 import { LayoutComponent } from '../layout';
 
 @Component({
     selector: 'app-words',
     standalone: true,
-    imports: [LayoutComponent, CategoryListComponent],
+    imports: [LayoutComponent, WordsListComponent],
     templateUrl: './words.component.html',
     styleUrl: './words.component.scss',
     changeDetection: ChangeDetectionStrategy.OnPush,

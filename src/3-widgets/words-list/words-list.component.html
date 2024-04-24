@@ -1,0 +1,4 @@
+<div class="words_list" *ngIf="words$ | async as words">
+    <!-- <div *ngFor="let word of words.data"></div> -->
+    {{ words | json }}
+</div>

@@ -23,6 +23,8 @@ import { categoryControllerCreate } from '../fn/operations/category-controller-c
 import { CategoryControllerCreate$Params } from '../fn/operations/category-controller-create';
 import { categoryControllerFindBasicCategories } from '../fn/operations/category-controller-find-basic-categories';
 import { CategoryControllerFindBasicCategories$Params } from '../fn/operations/category-controller-find-basic-categories';
+import { categoryControllerFindMany } from '../fn/operations/category-controller-find-many';
+import { CategoryControllerFindMany$Params } from '../fn/operations/category-controller-find-many';
 import { categoryControllerFindOne } from '../fn/operations/category-controller-find-one';
 import { CategoryControllerFindOne$Params } from '../fn/operations/category-controller-find-one';
 import { categoryControllerFindUserCategories } from '../fn/operations/category-controller-find-user-categories';
@@ -729,6 +731,37 @@ export class ApiService extends BaseService {
      */
     categoryControllerRemove(params: CategoryControllerRemove$Params, context?: HttpContext): Observable<CategoryDto> {
         return this.categoryControllerRemove$Response(params, context).pipe(
+            map((r: StrictHttpResponse<CategoryDto>): CategoryDto => r.body),
+        );
+    }
+
+    /** Path part for operation `categoryControllerFindMany()` */
+    static readonly CategoryControllerFindManyPath = '/api/v1/words/category/{id}/list';
+
+    /**
+     * This method provides access to the full `HttpResponse`, allowing access to response headers.
+     * To access only the response body, use `categoryControllerFindMany()` instead.
+     *
+     * This method doesn't expect any request body.
+     */
+    categoryControllerFindMany$Response(
+        params: CategoryControllerFindMany$Params,
+        context?: HttpContext,
+    ): Observable<StrictHttpResponse<CategoryDto>> {
+        return categoryControllerFindMany(this.http, this.rootUrl, params, context);
+    }
+
+    /**
+     * This method provides access only to the response body.
+     * To access the full response (for headers, for example), `categoryControllerFindMany$Response()` instead.
+     *
+     * This method doesn't expect any request body.
+     */
+    categoryControllerFindMany(
+        params: CategoryControllerFindMany$Params,
+        context?: HttpContext,
+    ): Observable<CategoryDto> {
+        return this.categoryControllerFindMany$Response(params, context).pipe(
             map((r: StrictHttpResponse<CategoryDto>): CategoryDto => r.body),
         );
     }

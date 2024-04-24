@@ -1,11 +1,12 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { RouterLink } from '@angular/router';
 import { CategoryDto } from '@/shared/api/generated';
 
 @Component({
     selector: 'app-category',
     standalone: true,
-    imports: [CommonModule],
+    imports: [CommonModule, RouterLink],
     templateUrl: './category.component.html',
     styleUrl: './category.component.scss',
     changeDetection: ChangeDetectionStrategy.OnPush,

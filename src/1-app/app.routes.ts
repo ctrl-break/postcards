@@ -1,5 +1,6 @@
 import { Routes } from '@angular/router';
 import { CardsComponent } from '@/pages/cards/cards.component';
+import { CategoriesComponent } from '@/pages/categories/categories.component';
 import { MainComponent } from '@/pages/main/main.component';
 import { ProfileComponent } from '@/pages/profile/profile.component';
 import { SigninComponent } from '@/pages/signin/signin.component';
@@ -23,10 +24,17 @@ export const routes: Routes = [
         canActivate: [userGuard],
     },
     {
-        path: 'words',
+        path: 'words/:id/list',
+        pathMatch: 'full',
         component: WordsComponent,
         canActivate: [userGuard],
     },
+    {
+        path: 'words',
+        component: CategoriesComponent,
+        canActivate: [userGuard],
+    },
+
     {
         path: 'profile',
         component: ProfileComponent,

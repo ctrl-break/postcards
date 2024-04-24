@@ -20,7 +20,7 @@ fs.writeFileSync(
     './src/6-shared/api/generated/index.ts',
     `
 export { ApiService } from './services';
-
+export { ApiConfiguration } from './api-configuration';
 export * from './models';
 
 `,
