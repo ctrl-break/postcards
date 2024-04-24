@@ -3,8 +3,8 @@ import { ChangeDetectionStrategy, Component, OnInit, inject } from '@angular/cor
 import { MatButtonModule } from '@angular/material/button';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatIconModule } from '@angular/material/icon';
-import { LayoutComponent } from '@/pages/layout';
 import { ApiService } from '@/shared/api/generated';
+import { LayoutComponent } from '../layout';
 
 @Component({
     selector: 'app-main',

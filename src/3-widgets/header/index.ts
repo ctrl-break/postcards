@@ -1,1 +1,1 @@
-export { HeaderComponent } from './ui';
+export { HeaderComponent } from './header.component';

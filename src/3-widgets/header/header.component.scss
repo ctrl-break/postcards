@@ -4,6 +4,11 @@
     justify-content: space-between;
     padding: 0 2rem;
 
+    &.mobile {
+        width: 100%;
+        padding: 0;
+    }
+
     // background-color: mat.get-color-from-palette(custom-theme.$app-primary, 500);
     // color: mat.get-color-from-palette(custom-theme.$app-accent, A200);
 

@@ -12,5 +12,5 @@ import { ThemeService } from '@/shared/lib/providers';
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LayoutComponent {
-    themeService: ThemeService = inject(ThemeService);
+    themeService = inject(ThemeService);
 }
