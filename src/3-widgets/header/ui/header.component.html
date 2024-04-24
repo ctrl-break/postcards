@@ -1,1 +1,21 @@
-<p>header works!</p>
+<mat-toolbar class="primary-bg" color="primary">
+    <div class="container-fluid header">
+        <!--         
+        <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
+            <mat-icon>menu</mat-icon>
+        </button> -->
+
+        <span>Postcards</span>
+        <!-- <span class="example-spacer"></span> -->
+
+        <div class="theme-control">
+            <button mat-icon-button (click)="toggleTheme()">
+                @if (themeService.themeSignal() === 'dark-theme') {
+                    <mat-icon>bedtime</mat-icon>
+                } @else {
+                    <mat-icon>light_mode</mat-icon>
+                }
+            </button>
+        </div>
+    </div>
+</mat-toolbar>
