@@ -8,7 +8,8 @@
         "watch": "ng build --watch --configuration development",
         "test": "ng test",
         "lint": "ng lint --fix && npm run format",
-        "format": "prettier --write \"src/**/*.{ts,html,scss}\""
+        "format": "prettier --write \"src/**/*.{ts,html,scss}\"",
+        "generate-api": "ng-openapi-gen -i http://localhost:3000/swagger-yaml -o ./src/6-shared/api/generated && node update-api && npm run lint"
     },
     "private": true,
     "dependencies": {
