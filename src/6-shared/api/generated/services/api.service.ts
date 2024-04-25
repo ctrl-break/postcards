@@ -19,16 +19,17 @@ import { authControllerRefreshTokens } from '../fn/operations/auth-controller-re
 import { AuthControllerRefreshTokens$Params } from '../fn/operations/auth-controller-refresh-tokens';
 import { authControllerRegister } from '../fn/operations/auth-controller-register';
 import { AuthControllerRegister$Params } from '../fn/operations/auth-controller-register';
+import { CategoryAssociationDto } from '../models/category-association-dto';
 import { categoryControllerCreate } from '../fn/operations/category-controller-create';
 import { CategoryControllerCreate$Params } from '../fn/operations/category-controller-create';
 import { categoryControllerFindBasicCategories } from '../fn/operations/category-controller-find-basic-categories';
 import { CategoryControllerFindBasicCategories$Params } from '../fn/operations/category-controller-find-basic-categories';
-import { categoryControllerFindMany } from '../fn/operations/category-controller-find-many';
-import { CategoryControllerFindMany$Params } from '../fn/operations/category-controller-find-many';
 import { categoryControllerFindOne } from '../fn/operations/category-controller-find-one';
 import { CategoryControllerFindOne$Params } from '../fn/operations/category-controller-find-one';
 import { categoryControllerFindUserCategories } from '../fn/operations/category-controller-find-user-categories';
 import { CategoryControllerFindUserCategories$Params } from '../fn/operations/category-controller-find-user-categories';
+import { categoryControllerFindWordsByCategory } from '../fn/operations/category-controller-find-words-by-category';
+import { CategoryControllerFindWordsByCategory$Params } from '../fn/operations/category-controller-find-words-by-category';
 import { categoryControllerRemove } from '../fn/operations/category-controller-remove';
 import { CategoryControllerRemove$Params } from '../fn/operations/category-controller-remove';
 import { categoryControllerUpdate } from '../fn/operations/category-controller-update';
@@ -43,6 +44,8 @@ import { ImageControllerFindById$Params } from '../fn/operations/image-controlle
 import { imageControllerSearchImages } from '../fn/operations/image-controller-search-images';
 import { ImageControllerSearchImages$Params } from '../fn/operations/image-controller-search-images';
 import { ImageDto } from '../models/image-dto';
+import { PageDto } from '../models/page-dto';
+import { PageMetaDto } from '../models/page-meta-dto';
 import { profileControllerGetUserVocabulary } from '../fn/operations/profile-controller-get-user-vocabulary';
 import { ProfileControllerGetUserVocabulary$Params } from '../fn/operations/profile-controller-get-user-vocabulary';
 import { settingsControllerGetUserSettings } from '../fn/operations/settings-controller-get-user-settings';
@@ -735,34 +738,58 @@ export class ApiService extends BaseService {
         );
     }
 
-    /** Path part for operation `categoryControllerFindMany()` */
-    static readonly CategoryControllerFindManyPath = '/api/v1/words/category/{id}/list';
+    /** Path part for operation `categoryControllerFindWordsByCategory()` */
+    static readonly CategoryControllerFindWordsByCategoryPath = '/api/v1/words/category/{id}/list';
 
     /**
      * This method provides access to the full `HttpResponse`, allowing access to response headers.
-     * To access only the response body, use `categoryControllerFindMany()` instead.
+     * To access only the response body, use `categoryControllerFindWordsByCategory()` instead.
      *
      * This method doesn't expect any request body.
      */
-    categoryControllerFindMany$Response(
-        params: CategoryControllerFindMany$Params,
+    categoryControllerFindWordsByCategory$Response(
+        params: CategoryControllerFindWordsByCategory$Params,
         context?: HttpContext,
-    ): Observable<StrictHttpResponse<CategoryDto>> {
-        return categoryControllerFindMany(this.http, this.rootUrl, params, context);
+    ): Observable<
+        StrictHttpResponse<
+            PageDto & {
+                data?: Array<CategoryAssociationDto>;
+                meta?: PageMetaDto;
+            }
+        >
+    > {
+        return categoryControllerFindWordsByCategory(this.http, this.rootUrl, params, context);
     }
 
     /**
      * This method provides access only to the response body.
-     * To access the full response (for headers, for example), `categoryControllerFindMany$Response()` instead.
+     * To access the full response (for headers, for example), `categoryControllerFindWordsByCategory$Response()` instead.
      *
      * This method doesn't expect any request body.
      */
-    categoryControllerFindMany(
-        params: CategoryControllerFindMany$Params,
+    categoryControllerFindWordsByCategory(
+        params: CategoryControllerFindWordsByCategory$Params,
         context?: HttpContext,
-    ): Observable<CategoryDto> {
-        return this.categoryControllerFindMany$Response(params, context).pipe(
-            map((r: StrictHttpResponse<CategoryDto>): CategoryDto => r.body),
+    ): Observable<
+        PageDto & {
+            data?: Array<CategoryAssociationDto>;
+            meta?: PageMetaDto;
+        }
+    > {
+        return this.categoryControllerFindWordsByCategory$Response(params, context).pipe(
+            map(
+                (
+                    r: StrictHttpResponse<
+                        PageDto & {
+                            data?: Array<CategoryAssociationDto>;
+                            meta?: PageMetaDto;
+                        }
+                    >,
+                ): PageDto & {
+                    data?: Array<CategoryAssociationDto>;
+                    meta?: PageMetaDto;
+                } => r.body,
+            ),
         );
     }
 

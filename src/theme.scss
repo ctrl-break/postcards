@@ -52,12 +52,20 @@ html {
             // border: 1px solid currentColor;
             background-color: mat.get-theme-color($dark-theme, primary, 20);
         }
+
+        a {
+            color: mat.get-theme-color($dark-theme, primary, 80);;
+        }
     }
 
     .light-theme {
         @include mat.all-component-colors($light-theme);
         .router-link-active {
             background-color: mat.get-theme-color($light-theme, primary, 400);
+        }
+
+        a {
+            color: mat.get-theme-color($light-theme, primary, 10);;
         }
     }
 }
