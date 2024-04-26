@@ -13,12 +13,12 @@ export class ThemeService {
 
     setTheme(theme: Themes) {
         this.themeSignal.set(theme);
-        this.cookieService.set('theme', theme);
+        this.cookieService.set('theme', theme, { path: '/' });
     }
 
     updateTheme() {
         const newTheme: Themes = this.themeSignal() === 'dark-theme' ? 'light-theme' : 'dark-theme';
         this.themeSignal.update(() => newTheme);
-        this.cookieService.set('theme', newTheme);
+        this.cookieService.set('theme', newTheme, { path: '/' });
     }
 }

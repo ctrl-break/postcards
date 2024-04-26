@@ -1,14 +1,15 @@
 .word_list_item {
     display: flex;
     justify-content: center;
-    .word, .translation {
+    .word,
+    .translation {
         font-size: 20px;
         line-height: 24px;
         display: block;
         width: 50%;
         padding: 0 12px;
     }
-    .word{
+    .word {
         text-align: right;
     }
     .translation {

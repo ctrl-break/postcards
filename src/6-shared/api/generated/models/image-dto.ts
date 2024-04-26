@@ -10,5 +10,7 @@ export interface ImageDto {
     id: number;
     provider?: ImageProvider;
     url: string;
-    urls: {};
+    urls: {
+        [key: string]: any;
+    };
 }

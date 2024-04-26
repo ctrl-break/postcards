@@ -1,6 +1,7 @@
 /* tslint:disable */
 /* eslint-disable */
 import { PartOfSpeech } from '../models/part-of-speech';
+import { WordUsageDto } from '../models/word-usage-dto';
 export interface WordDto {
     context?: string;
     defaultImageId?: number;
@@ -13,5 +14,6 @@ export interface WordDto {
         [key: string]: any;
     };
     translation: string;
+    usages?: Array<WordUsageDto>;
     word: string;
 }

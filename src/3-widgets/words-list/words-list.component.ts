@@ -18,7 +18,7 @@ import { InfiniteScrollDirective } from '@/shared/ui/infinitive-scroll';
 })
 export class WordsListComponent {
     apiService = inject(ApiService);
-    route: ActivatedRoute = inject(ActivatedRoute);
+    route = inject(ActivatedRoute);
 
     currentPage$ = new BehaviorSubject(1);
     words$ = combineLatest([this.route.params, this.currentPage$]).pipe(
