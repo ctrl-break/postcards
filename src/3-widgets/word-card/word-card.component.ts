@@ -2,12 +2,13 @@ import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Observable, switchMap } from 'rxjs';
+import { PostcardComponent } from '@/features/postcard';
 import { ApiService, WordDto } from '@/shared/api/generated';
 
 @Component({
     selector: 'app-word-card',
     standalone: true,
-    imports: [CommonModule],
+    imports: [CommonModule, PostcardComponent],
     templateUrl: './word-card.component.html',
     styleUrl: './word-card.component.scss',
     changeDetection: ChangeDetectionStrategy.OnPush,

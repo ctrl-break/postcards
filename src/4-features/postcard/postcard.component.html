@@ -1,0 +1,42 @@
+<div class="postcard">
+    <div class="border">
+        <div class="word_wrapper dark-text">
+            <div class="left_column">
+                <div class="examples">
+                    <div class="example" *ngFor="let sentence of word.usages">
+                        <div class="sentence">{{ sentence.sentence }}</div>
+                        <div class="sentence_translation">
+                            {{ sentence.translation }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="right_column">
+                <div class="postmark">
+                    <div class="postage_stamp"></div>
+                </div>
+
+                <div class="bottom_line">
+                    <div class="word">{{ word.word }}</div>
+
+                    <div class="transcription">{{ word.transcription }}</div>
+                </div>
+
+                <div class="translation bottom_line">
+                    {{ word.translation }}
+                </div>
+
+                <div class="bottom_line pos">
+                    {{ word.pos }}
+                </div>
+
+                <div class="meaning bottom_line">
+                    {{ word.meaning }} <span *ngIf="word.context">(Context: {{ word.context }})</span>
+                </div>
+
+                <div class="bottom_line"></div>
+            </div>
+        </div>
+    </div>
+</div>

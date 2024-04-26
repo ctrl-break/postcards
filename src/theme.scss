@@ -68,4 +68,12 @@ html {
             color: mat.get-theme-color($light-theme, primary, 10);
         }
     }
+
+    .dark-text {
+        color: $dark-text-color;
+    }
+
+    .light-text {
+        color: $light-text-color;
+    }
 }

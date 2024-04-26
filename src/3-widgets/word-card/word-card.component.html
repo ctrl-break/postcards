@@ -1,17 +1,3 @@
 <div class="word_card" *ngIf="word$ | async as word">
-    <div class="word">{{ word.word }} / {{ word.transcription }}</div>
-
-    <div class="translation">
-        {{ word.translation }}
-    </div>
-
-    <div class="meaning">
-        {{ word.meaning }}
-    </div>
-
-    <div class="examples">
-        <div class="example" *ngFor="let sentence of word.usages">
-            {{ sentence.sentence }} - {{ sentence.translation }}
-        </div>
-    </div>
+    <app-postcard [word]="word"></app-postcard>
 </div>
