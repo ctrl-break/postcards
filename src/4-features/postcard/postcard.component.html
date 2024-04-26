@@ -14,7 +14,11 @@
 
             <div class="right_column">
                 <div class="postmark">
-                    <div class="postage_stamp"></div>
+                    <div class="postage_stamp">
+                        <div class="stamp" *ngIf="wordImage">
+                            <img [src]="wordImage.urls['thumb']" [alt]="wordImage.description" />
+                        </div>
+                    </div>
                 </div>
 
                 <div class="bottom_line">

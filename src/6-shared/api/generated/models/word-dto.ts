@@ -1,9 +1,11 @@
 /* tslint:disable */
 /* eslint-disable */
+import { ImageDto } from '../models/image-dto';
 import { PartOfSpeech } from '../models/part-of-speech';
 import { WordUsageDto } from '../models/word-usage-dto';
 export interface WordDto {
     context?: string;
+    defaultImage?: ImageDto;
     defaultImageId?: number;
     id: number;
     isVisible: boolean;

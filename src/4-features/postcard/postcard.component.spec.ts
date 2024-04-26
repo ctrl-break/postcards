@@ -3,21 +3,20 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { PostcardComponent } from './postcard.component';
 
 describe('PostcardComponent', () => {
-  let component: PostcardComponent;
-  let fixture: ComponentFixture<PostcardComponent>;
+    let component: PostcardComponent;
+    let fixture: ComponentFixture<PostcardComponent>;
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      imports: [PostcardComponent]
-    })
-    .compileComponents();
-    
-    fixture = TestBed.createComponent(PostcardComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+    beforeEach(async () => {
+        await TestBed.configureTestingModule({
+            imports: [PostcardComponent],
+        }).compileComponents();
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
+        fixture = TestBed.createComponent(PostcardComponent);
+        component = fixture.componentInstance;
+        fixture.detectChanges();
+    });
+
+    it('should create', () => {
+        expect(component).toBeTruthy();
+    });
 });

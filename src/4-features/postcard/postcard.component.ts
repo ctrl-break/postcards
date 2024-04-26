@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
-import { WordDto } from '@/shared/api/generated';
+import { ImageDto, WordDto } from '@/shared/api/generated';
 
 @Component({
     selector: 'app-postcard',
@@ -12,4 +12,5 @@ import { WordDto } from '@/shared/api/generated';
 })
 export class PostcardComponent {
     @Input() word!: WordDto;
+    @Input() wordImage?: ImageDto | null;
 }

@@ -77,6 +77,8 @@ import { wordControllerCreate } from '../fn/operations/word-controller-create';
 import { WordControllerCreate$Params } from '../fn/operations/word-controller-create';
 import { wordControllerFindOne } from '../fn/operations/word-controller-find-one';
 import { WordControllerFindOne$Params } from '../fn/operations/word-controller-find-one';
+import { wordControllerFindOneAndUpdateImage } from '../fn/operations/word-controller-find-one-and-update-image';
+import { WordControllerFindOneAndUpdateImage$Params } from '../fn/operations/word-controller-find-one-and-update-image';
 import { wordControllerFindPagedWords } from '../fn/operations/word-controller-find-paged-words';
 import { WordControllerFindPagedWords$Params } from '../fn/operations/word-controller-find-paged-words';
 import { wordControllerRemove } from '../fn/operations/word-controller-remove';
@@ -319,6 +321,37 @@ export class ApiService extends BaseService {
     wordControllerCreate(params: WordControllerCreate$Params, context?: HttpContext): Observable<WordDto> {
         return this.wordControllerCreate$Response(params, context).pipe(
             map((r: StrictHttpResponse<WordDto>): WordDto => r.body),
+        );
+    }
+
+    /** Path part for operation `wordControllerFindOneAndUpdateImage()` */
+    static readonly WordControllerFindOneAndUpdateImagePath = '/api/v1/words/word/{id}/update-image';
+
+    /**
+     * This method provides access to the full `HttpResponse`, allowing access to response headers.
+     * To access only the response body, use `wordControllerFindOneAndUpdateImage()` instead.
+     *
+     * This method doesn't expect any request body.
+     */
+    wordControllerFindOneAndUpdateImage$Response(
+        params: WordControllerFindOneAndUpdateImage$Params,
+        context?: HttpContext,
+    ): Observable<StrictHttpResponse<ImageDto>> {
+        return wordControllerFindOneAndUpdateImage(this.http, this.rootUrl, params, context);
+    }
+
+    /**
+     * This method provides access only to the response body.
+     * To access the full response (for headers, for example), `wordControllerFindOneAndUpdateImage$Response()` instead.
+     *
+     * This method doesn't expect any request body.
+     */
+    wordControllerFindOneAndUpdateImage(
+        params: WordControllerFindOneAndUpdateImage$Params,
+        context?: HttpContext,
+    ): Observable<ImageDto> {
+        return this.wordControllerFindOneAndUpdateImage$Response(params, context).pipe(
+            map((r: StrictHttpResponse<ImageDto>): ImageDto => r.body),
         );
     }
 
