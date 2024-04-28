@@ -34,7 +34,7 @@ export class SigninFormComponent {
             next: (res) => {
                 console.log(res);
                 this.authService.setTokensCookie(res.accessToken);
-                this.router.navigateByUrl('/main');
+                this.router.navigateByUrl('/cards');
             },
             error: (err) => {
                 console.error(err);

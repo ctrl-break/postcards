@@ -1,5 +1,6 @@
 /* tslint:disable */
 /* eslint-disable */
+import { WordDto } from '../models/word-dto';
 export interface VocabularyDto {
     createdAt: string;
     id: number;
@@ -9,6 +10,7 @@ export interface VocabularyDto {
     translation?: string;
     updatedAt: string;
     userId: number;
-    userWord?: string;
-    wordId: number;
+    userWord: string;
+    word?: WordDto;
+    wordId?: number;
 }

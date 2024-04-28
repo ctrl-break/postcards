@@ -1,11 +1,14 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { toObservable } from '@angular/core/rxjs-interop';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { ActivatedRoute } from '@angular/router';
-import { BehaviorSubject, combineLatest, delay, map, of, scan, switchMap, tap } from 'rxjs';
-import { WordsListItemComponent } from '@/entities/words-list-item';
-import { ApiService } from '@/shared/api/generated';
+import { BehaviorSubject, Observable, combineLatest, delay, map, of, scan, switchMap, tap } from 'rxjs';
+import { WordsListItemComponent } from '@/features/words-list-item';
+import { ApiService, CategoryAssociationDto } from '@/shared/api/generated';
 import { INFINITE_SCROLL_PAGE_SIZE } from '@/shared/lib';
+import { CategoryAssociation } from '@/shared/lib/models';
+import { UserStore, VocabularyStore } from '@/shared/lib/stores';
 import { InfiniteScrollDirective } from '@/shared/ui/infinitive-scroll';
 
 @Component({
@@ -19,14 +22,23 @@ import { InfiniteScrollDirective } from '@/shared/ui/infinitive-scroll';
 export class WordsListComponent {
     apiService = inject(ApiService);
     route = inject(ActivatedRoute);
+    userStore = inject(UserStore);
+    vocabularyStore = inject(VocabularyStore);
 
     currentPage$ = new BehaviorSubject(1);
-    words$ = combineLatest([this.route.params, this.currentPage$]).pipe(
-        switchMap(([params, pageNumber]) => {
-            this.categoryId = params['id'];
-            return this.getPage(pageNumber);
+    words$: Observable<CategoryAssociation[]> = combineLatest([
+        combineLatest([this.route.params, this.currentPage$]).pipe(
+            switchMap(([params, pageNumber]) => {
+                this.categoryId = params['id'];
+                return this.getPage(pageNumber);
+            }),
+            scan((acc, current) => [...acc, ...current]),
+        ),
+        toObservable(this.vocabularyStore.wordIds),
+    ]).pipe(
+        map(([words, vocabularyIds]) => {
+            return words.map((word) => ({ ...word, isVocabulary: !!vocabularyIds.find((voc) => voc === word.id) }));
         }),
-        scan((acc, current) => [...acc, ...current]),
     );
 
     categoryId: string | undefined;
@@ -55,5 +67,9 @@ export class WordsListComponent {
 
     getNextPage() {
         this.currentPage$.next(this.currentPage$.value + 1);
+    }
+
+    wordTrackBy(index: number, word: CategoryAssociationDto) {
+        return word.id;
     }
 }

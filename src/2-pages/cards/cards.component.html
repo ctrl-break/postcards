@@ -1,3 +1,4 @@
 <app-layout>
-    <p>cards works!</p>
+    <app-words-list-item *ngFor="let word of vocabularyStore.vocabulary()" [word]="word.word!" [isVocabulary]="true">
+    </app-words-list-item>
 </app-layout>
