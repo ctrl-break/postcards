@@ -13,4 +13,6 @@ import { ImageDto, WordDto } from '@/shared/api/generated';
 export class PostcardComponent {
     @Input() word!: WordDto;
     @Input() wordImage?: ImageDto | null;
+
+    flipped = false;
 }
