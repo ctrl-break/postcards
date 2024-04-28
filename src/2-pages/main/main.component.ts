@@ -1,9 +1,8 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, OnInit, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatIconModule } from '@angular/material/icon';
-import { ApiService } from '@/shared/api/generated';
 import { LayoutComponent } from '../layout';
 
 @Component({
@@ -14,16 +13,4 @@ import { LayoutComponent } from '../layout';
     styleUrl: './main.component.scss',
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class MainComponent implements OnInit {
-    apiService = inject(ApiService);
-
-    ngOnInit(): void {
-        this.apiService.profileControllerGetUserVocabulary().subscribe((res) => {
-            console.log(res);
-        });
-
-        this.apiService.vocabularyControllerGetUserVocabulary().subscribe((res) => {
-            console.log(res);
-        });
-    }
-}
+export class MainComponent {}

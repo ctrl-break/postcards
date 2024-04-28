@@ -11,13 +11,7 @@ import { signinGuard, userGuard } from '@/shared/lib/guards';
 export const routes: Routes = [
     {
         path: '',
-        redirectTo: 'signin',
-        pathMatch: 'full',
-    },
-    {
-        path: 'main',
         component: MainComponent,
-        canActivate: [userGuard],
     },
     {
         path: 'cards',

@@ -7,7 +7,7 @@ export const signinGuard: CanActivateFn = () => {
     const router = inject(Router);
     const isSignedIn = !!cookieService.get('accessToken');
     if (isSignedIn) {
-        router.navigateByUrl('/main');
+        router.navigateByUrl('/cards');
     }
     return !isSignedIn;
 };

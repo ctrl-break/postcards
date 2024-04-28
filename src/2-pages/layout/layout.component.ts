@@ -1,7 +1,6 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { HeaderComponent } from '@/widgets/header';
-import { ThemeService } from '@/shared/lib/providers';
 
 @Component({
     selector: 'app-layout',
@@ -11,6 +10,4 @@ import { ThemeService } from '@/shared/lib/providers';
     styleUrl: './layout.component.scss',
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class LayoutComponent {
-    themeService = inject(ThemeService);
-}
+export class LayoutComponent {}

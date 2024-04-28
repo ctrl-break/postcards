@@ -3,7 +3,7 @@ import { inject } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
 import { BehaviorSubject, Observable, catchError, filter, switchMap, take, throwError } from 'rxjs';
 import { AuthService } from '@/shared/api/auth.service';
-import { PATH_AUTH } from '@/shared/lib/constants';
+import { PATH_AUTH, REFRESH_TOKEN_ERROR } from '@/shared/lib/constants';
 
 let isRefreshing = false;
 const refreshTokenSubject: BehaviorSubject<string | null> = new BehaviorSubject<string | null>(null);
@@ -46,13 +46,13 @@ export const authInterceptor: HttpInterceptorFn = (
                     } else {
                         // If refresh token fails, logout user or handle as needed
                         // authService.logout();
-                        return throwError(() => 'Refresh token failed');
+                        return throwError(() => REFRESH_TOKEN_ERROR);
                     }
                 }),
                 catchError(() => {
                     // If refresh token fails, logout user or handle as needed
                     // authService.logout();
-                    return throwError(() => 'Refresh token failed');
+                    return throwError(() => REFRESH_TOKEN_ERROR);
                 }),
             );
         } else {

@@ -30,7 +30,7 @@ $dark-bg-color: #004f4f;
 $semi-dark-bg-color: #333;
 $light-text-color: #cacaca;
 // Light theme variables
-$light-bg-color: #d2d2d2;
+$light-bg-color: #fff;
 $semi-light-bg-color: #c0c0c0;
 $dark-text-color: #333;
 
@@ -60,6 +60,9 @@ html {
 
     .light-theme {
         @include mat.all-component-colors($light-theme);
+
+        background-color: $light-bg-color;
+
         .router-link-active {
             background-color: mat.get-theme-color($light-theme, primary, 400);
         }
