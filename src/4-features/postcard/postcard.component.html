@@ -2,9 +2,12 @@
 <!-- eslint-disable @angular-eslint/template/click-events-have-key-events -->
 
 <div class="postcard_wrapper" (click)="flipped = !flipped" [ngClass]="{ flipped: flipped }">
-    <div class="picture">
+    <div class="picture" [ngClass]="{ colored: !wordImage }">
         <img class="fitted" *ngIf="wordImage" [src]="wordImage.urls['regular']" [alt]="wordImage.description" />
         <img class="contained" *ngIf="wordImage" [src]="wordImage.urls['regular']" [alt]="wordImage.description" />
+        <div class="word_container">
+            <div class="word">{{ word.word }}</div>
+        </div>
     </div>
 
     <div class="postcard">
@@ -45,7 +48,8 @@
                     </div>
 
                     <div class="meaning bottom_line">
-                        {{ word.meaning }} <span *ngIf="word.context">(Context: {{ word.context }})</span>
+                        {{ word.meaning }}
+                        <ng-container *ngIf="word.context">(Context: {{ word.context }})</ng-container>
                     </div>
 
                     <div class="bottom_line"></div>

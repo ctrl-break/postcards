@@ -21,7 +21,7 @@ export const VocabularyStore = signalStore(
         wordIds: computed(() =>
             vocabulary()
                 .filter((voc) => voc.wordId)
-                .map((voc) => voc.wordId),
+                .map((voc) => ({ vocabularyId: voc.id, wordId: voc.wordId })),
         ),
     })),
     withMethods((store, apiService = inject(ApiService)) => ({

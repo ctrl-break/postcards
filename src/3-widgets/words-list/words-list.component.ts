@@ -37,7 +37,12 @@ export class WordsListComponent {
         toObservable(this.vocabularyStore.wordIds),
     ]).pipe(
         map(([words, vocabularyIds]) => {
-            return words.map((word) => ({ ...word, isVocabulary: !!vocabularyIds.find((voc) => voc === word.id) }));
+            return words.map((word) => ({
+                ...word,
+                vocabularyId: word.wordId
+                    ? vocabularyIds.find((voc) => voc.wordId === word.wordId)?.vocabularyId
+                    : undefined,
+            }));
         }),
     );
 

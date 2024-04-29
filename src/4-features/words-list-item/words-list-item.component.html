@@ -1,5 +1,7 @@
 <div class="word_list_item">
-    <a class="word" [routerLink]="isVocabulary ? [] : ['/words/word/' + word.id]"> {{ word.word }} </a>
+    <a class="word" [routerLink]="vocabularyId ? ['/words/vocabulary/' + vocabularyId] : ['/words/word/' + word.id]">
+        {{ word.word }}
+    </a>
 
     <div class="action">
         <button
@@ -8,8 +10,8 @@
             aria-label="Toggle vocabulary word"
             (click)="toggleVocabularyWord(word.id)"
         >
-            <mat-icon *ngIf="!isVocabulary">bookmark_add</mat-icon>
-            <mat-icon *ngIf="isVocabulary">remove</mat-icon>
+            <mat-icon *ngIf="!vocabularyId">bookmark_add</mat-icon>
+            <mat-icon *ngIf="vocabularyId">remove</mat-icon>
         </button>
     </div>
 

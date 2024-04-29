@@ -19,15 +19,22 @@ export const routes: Routes = [
         canActivate: [userGuard],
     },
     {
-        path: 'words/:id/list',
-        pathMatch: 'full',
-        component: WordsComponent,
-        canActivate: [userGuard],
-    },
-    {
         path: 'words/word/:id',
         pathMatch: 'full',
         component: WordComponent,
+        canActivate: [userGuard],
+    },
+    {
+        path: 'words/vocabulary/:id',
+        pathMatch: 'full',
+        data: { type: 'vocabulary' },
+        component: WordComponent,
+        canActivate: [userGuard],
+    },
+    {
+        path: 'words/:id/list',
+        pathMatch: 'full',
+        component: WordsComponent,
         canActivate: [userGuard],
     },
     {

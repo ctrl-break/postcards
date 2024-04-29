@@ -5,5 +5,5 @@ export interface Word extends WordDto {
 }
 
 export interface CategoryAssociation extends CategoryAssociationDto {
-    isVocabulary: boolean;
+    vocabularyId?: number;
 }

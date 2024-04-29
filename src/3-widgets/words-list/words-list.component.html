@@ -2,7 +2,7 @@
     <app-words-list-item
         *ngFor="let word of words; trackBy: wordTrackBy"
         [word]="word.dictionary!"
-        [isVocabulary]="word.isVocabulary"
+        [vocabularyId]="word.vocabularyId"
     >
     </app-words-list-item>
     <div class="loader" *ngIf="currentPage$.value < lastPage" (appInfiniteScroll)="getNextPage()">

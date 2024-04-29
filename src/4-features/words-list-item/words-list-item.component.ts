@@ -18,13 +18,13 @@ export class WordsListItemComponent {
     vocabularyStore = inject(VocabularyStore);
 
     @Input() word!: WordDto;
-    @Input() isVocabulary?: boolean = false;
+    @Input() vocabularyId?: number;
 
     toggleVocabularyWord(wordId: number) {
-        if (this.isVocabulary) {
-            this.vocabularyStore.removeFromVocabulary(wordId).then(() => (this.isVocabulary = false));
+        if (this.vocabularyId) {
+            this.vocabularyStore.removeFromVocabulary(wordId);
         } else {
-            this.vocabularyStore.addToVocabulary(wordId).then(() => (this.isVocabulary = true));
+            this.vocabularyStore.addToVocabulary(wordId);
         }
     }
 }
