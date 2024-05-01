@@ -14,6 +14,11 @@ export const routes: Routes = [
         component: MainComponent,
     },
     {
+        path: 'signin',
+        component: SigninComponent,
+        canActivate: [signinGuard],
+    },
+    {
         path: 'cards',
         component: CardsComponent,
         canActivate: [userGuard],
@@ -47,10 +52,5 @@ export const routes: Routes = [
         path: 'profile',
         component: ProfileComponent,
         canActivate: [userGuard],
-    },
-    {
-        path: 'signin',
-        component: SigninComponent,
-        canActivate: [signinGuard],
     },
 ];

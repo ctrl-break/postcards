@@ -25,9 +25,10 @@ export const VocabularyStore = signalStore(
         ),
     })),
     withMethods((store, apiService = inject(ApiService)) => ({
-        async initVocabulary() {
-            const vocabulary = await firstValueFrom(apiService.vocabularyControllerGetUserVocabulary());
-            patchState(store, { isInited: true, vocabulary: vocabulary.sort(sortByLowerCaseUserWord) });
+        initVocabulary() {
+            return firstValueFrom(apiService.vocabularyControllerGetUserVocabulary()).then((vocabulary) => {
+                patchState(store, { isInited: true, vocabulary: vocabulary.sort(sortByLowerCaseUserWord) });
+            });
         },
         async addToVocabulary(wordId: number) {
             const params = { body: { wordId } };

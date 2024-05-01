@@ -1,8 +1,9 @@
-<!-- <ng-container *ngIf="inited"> -->
 <div class="app" [ngClass]="themeService.themeSignal()">
-    <app-initial-loader *ngIf="!userStore.isInited() || !vocabularyStore.isInited()"></app-initial-loader>
-
-    <router-outlet *ngIf="userStore.isInited() && vocabularyStore.isInited()" />
+    @if (init$ | async) {
+        <router-outlet />
+    } @else if (isStoresLoaded) {
+        <router-outlet />
+    } @else {
+        <app-initial-loader></app-initial-loader>
+    }
 </div>
-
-<!-- </ng-container> -->

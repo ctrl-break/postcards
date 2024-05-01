@@ -3,6 +3,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { AuthService } from '@/shared/api/auth.service';
+import { UserStore, VocabularyStore } from '@/shared/lib/stores';
 import { MatForms } from '@/shared/ui/mat-forms';
 
 @Component({
@@ -16,6 +17,8 @@ export class SigninFormComponent {
     private authService = inject(AuthService);
     private router = inject(Router);
     private snackBar = inject(MatSnackBar);
+    private userStore = inject(UserStore);
+    private vocabularyStore = inject(VocabularyStore);
 
     signInForm = new FormGroup({
         login: new FormControl('', [Validators.required, Validators.email]),
@@ -34,6 +37,8 @@ export class SigninFormComponent {
             next: (res) => {
                 console.log(res);
                 this.authService.setTokensCookie(res.accessToken);
+                this.userStore.initProfile();
+                this.vocabularyStore.initVocabulary();
                 this.router.navigateByUrl('/cards');
             },
             error: (err) => {
