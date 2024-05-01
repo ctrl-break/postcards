@@ -6,26 +6,26 @@ import { filter, map } from 'rxjs/operators';
 import { StrictHttpResponse } from '../../strict-http-response';
 import { RequestBuilder } from '../../request-builder';
 
-import { UserResponse } from '../../models/user-response';
+import { ProfileDto } from '../../models/profile-dto';
 
-export interface ProfileControllerGetUserVocabulary$Params {}
+export interface ProfileControllerGetProfileData$Params {}
 
-export function profileControllerGetUserVocabulary(
+export function profileControllerGetProfileData(
     http: HttpClient,
     rootUrl: string,
-    params?: ProfileControllerGetUserVocabulary$Params,
+    params?: ProfileControllerGetProfileData$Params,
     context?: HttpContext,
-): Observable<StrictHttpResponse<UserResponse>> {
-    const rb = new RequestBuilder(rootUrl, profileControllerGetUserVocabulary.PATH, 'get');
+): Observable<StrictHttpResponse<ProfileDto>> {
+    const rb = new RequestBuilder(rootUrl, profileControllerGetProfileData.PATH, 'get');
     if (params) {
     }
 
     return http.request(rb.build({ responseType: 'json', accept: 'application/json', context })).pipe(
         filter((r: any): r is HttpResponse<any> => r instanceof HttpResponse),
         map((r: HttpResponse<any>) => {
-            return r as StrictHttpResponse<UserResponse>;
+            return r as StrictHttpResponse<ProfileDto>;
         }),
     );
 }
 
-profileControllerGetUserVocabulary.PATH = '/api/v1/profile';
+profileControllerGetProfileData.PATH = '/api/v1/profile';

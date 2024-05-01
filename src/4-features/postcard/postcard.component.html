@@ -1,6 +1,10 @@
 <!-- eslint-disable @angular-eslint/template/interactive-supports-focus -->
 <!-- eslint-disable @angular-eslint/template/click-events-have-key-events -->
 
+<div class="back_arrow">
+    <button mat-fab color="primary" (click)="goBack()"><mat-icon>arrow_back</mat-icon></button>
+</div>
+
 <div class="postcard_wrapper" (click)="flipped = !flipped" [ngClass]="{ flipped: flipped }">
     <div class="picture" [ngClass]="{ colored: !wordImage }">
         <img class="fitted" *ngIf="wordImage" [src]="wordImage.urls['regular']" [alt]="wordImage.description" />

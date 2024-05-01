@@ -46,8 +46,9 @@ import { ImageControllerSearchImages$Params } from '../fn/operations/image-contr
 import { ImageDto } from '../models/image-dto';
 import { PageDto } from '../models/page-dto';
 import { PageMetaDto } from '../models/page-meta-dto';
-import { profileControllerGetUserVocabulary } from '../fn/operations/profile-controller-get-user-vocabulary';
-import { ProfileControllerGetUserVocabulary$Params } from '../fn/operations/profile-controller-get-user-vocabulary';
+import { profileControllerGetProfileData } from '../fn/operations/profile-controller-get-profile-data';
+import { ProfileControllerGetProfileData$Params } from '../fn/operations/profile-controller-get-profile-data';
+import { ProfileDto } from '../models/profile-dto';
 import { settingsControllerGetUserSettings } from '../fn/operations/settings-controller-get-user-settings';
 import { SettingsControllerGetUserSettings$Params } from '../fn/operations/settings-controller-get-user-settings';
 import { usageControllerCreate } from '../fn/operations/usage-controller-create';
@@ -60,7 +61,6 @@ import { usageControllerRemove } from '../fn/operations/usage-controller-remove'
 import { UsageControllerRemove$Params } from '../fn/operations/usage-controller-remove';
 import { usageControllerUpdate } from '../fn/operations/usage-controller-update';
 import { UsageControllerUpdate$Params } from '../fn/operations/usage-controller-update';
-import { UserResponse } from '../models/user-response';
 import { UserSettingDto } from '../models/user-setting-dto';
 import { vocabularyControllerCreate } from '../fn/operations/vocabulary-controller-create';
 import { VocabularyControllerCreate$Params } from '../fn/operations/vocabulary-controller-create';
@@ -594,238 +594,6 @@ export class ApiService extends BaseService {
         );
     }
 
-    /** Path part for operation `categoryControllerFindBasicCategories()` */
-    static readonly CategoryControllerFindBasicCategoriesPath = '/api/v1/words/category';
-
-    /**
-     * This method provides access to the full `HttpResponse`, allowing access to response headers.
-     * To access only the response body, use `categoryControllerFindBasicCategories()` instead.
-     *
-     * This method doesn't expect any request body.
-     */
-    categoryControllerFindBasicCategories$Response(
-        params?: CategoryControllerFindBasicCategories$Params,
-        context?: HttpContext,
-    ): Observable<StrictHttpResponse<Array<CategoryDto>>> {
-        return categoryControllerFindBasicCategories(this.http, this.rootUrl, params, context);
-    }
-
-    /**
-     * This method provides access only to the response body.
-     * To access the full response (for headers, for example), `categoryControllerFindBasicCategories$Response()` instead.
-     *
-     * This method doesn't expect any request body.
-     */
-    categoryControllerFindBasicCategories(
-        params?: CategoryControllerFindBasicCategories$Params,
-        context?: HttpContext,
-    ): Observable<Array<CategoryDto>> {
-        return this.categoryControllerFindBasicCategories$Response(params, context).pipe(
-            map((r: StrictHttpResponse<Array<CategoryDto>>): Array<CategoryDto> => r.body),
-        );
-    }
-
-    /** Path part for operation `categoryControllerCreate()` */
-    static readonly CategoryControllerCreatePath = '/api/v1/words/category';
-
-    /**
-     * This method provides access to the full `HttpResponse`, allowing access to response headers.
-     * To access only the response body, use `categoryControllerCreate()` instead.
-     *
-     * This method sends `application/json` and handles request body of type `application/json`.
-     */
-    categoryControllerCreate$Response(
-        params: CategoryControllerCreate$Params,
-        context?: HttpContext,
-    ): Observable<StrictHttpResponse<CategoryDto>> {
-        return categoryControllerCreate(this.http, this.rootUrl, params, context);
-    }
-
-    /**
-     * This method provides access only to the response body.
-     * To access the full response (for headers, for example), `categoryControllerCreate$Response()` instead.
-     *
-     * This method sends `application/json` and handles request body of type `application/json`.
-     */
-    categoryControllerCreate(params: CategoryControllerCreate$Params, context?: HttpContext): Observable<CategoryDto> {
-        return this.categoryControllerCreate$Response(params, context).pipe(
-            map((r: StrictHttpResponse<CategoryDto>): CategoryDto => r.body),
-        );
-    }
-
-    /** Path part for operation `categoryControllerFindUserCategories()` */
-    static readonly CategoryControllerFindUserCategoriesPath = '/api/v1/words/category/user';
-
-    /**
-     * This method provides access to the full `HttpResponse`, allowing access to response headers.
-     * To access only the response body, use `categoryControllerFindUserCategories()` instead.
-     *
-     * This method doesn't expect any request body.
-     */
-    categoryControllerFindUserCategories$Response(
-        params?: CategoryControllerFindUserCategories$Params,
-        context?: HttpContext,
-    ): Observable<StrictHttpResponse<Array<CategoryDto>>> {
-        return categoryControllerFindUserCategories(this.http, this.rootUrl, params, context);
-    }
-
-    /**
-     * This method provides access only to the response body.
-     * To access the full response (for headers, for example), `categoryControllerFindUserCategories$Response()` instead.
-     *
-     * This method doesn't expect any request body.
-     */
-    categoryControllerFindUserCategories(
-        params?: CategoryControllerFindUserCategories$Params,
-        context?: HttpContext,
-    ): Observable<Array<CategoryDto>> {
-        return this.categoryControllerFindUserCategories$Response(params, context).pipe(
-            map((r: StrictHttpResponse<Array<CategoryDto>>): Array<CategoryDto> => r.body),
-        );
-    }
-
-    /** Path part for operation `categoryControllerFindOne()` */
-    static readonly CategoryControllerFindOnePath = '/api/v1/words/category/{id}';
-
-    /**
-     * This method provides access to the full `HttpResponse`, allowing access to response headers.
-     * To access only the response body, use `categoryControllerFindOne()` instead.
-     *
-     * This method doesn't expect any request body.
-     */
-    categoryControllerFindOne$Response(
-        params: CategoryControllerFindOne$Params,
-        context?: HttpContext,
-    ): Observable<StrictHttpResponse<CategoryDto>> {
-        return categoryControllerFindOne(this.http, this.rootUrl, params, context);
-    }
-
-    /**
-     * This method provides access only to the response body.
-     * To access the full response (for headers, for example), `categoryControllerFindOne$Response()` instead.
-     *
-     * This method doesn't expect any request body.
-     */
-    categoryControllerFindOne(
-        params: CategoryControllerFindOne$Params,
-        context?: HttpContext,
-    ): Observable<CategoryDto> {
-        return this.categoryControllerFindOne$Response(params, context).pipe(
-            map((r: StrictHttpResponse<CategoryDto>): CategoryDto => r.body),
-        );
-    }
-
-    /** Path part for operation `categoryControllerUpdate()` */
-    static readonly CategoryControllerUpdatePath = '/api/v1/words/category/{id}';
-
-    /**
-     * This method provides access to the full `HttpResponse`, allowing access to response headers.
-     * To access only the response body, use `categoryControllerUpdate()` instead.
-     *
-     * This method sends `application/json` and handles request body of type `application/json`.
-     */
-    categoryControllerUpdate$Response(
-        params: CategoryControllerUpdate$Params,
-        context?: HttpContext,
-    ): Observable<StrictHttpResponse<CategoryDto>> {
-        return categoryControllerUpdate(this.http, this.rootUrl, params, context);
-    }
-
-    /**
-     * This method provides access only to the response body.
-     * To access the full response (for headers, for example), `categoryControllerUpdate$Response()` instead.
-     *
-     * This method sends `application/json` and handles request body of type `application/json`.
-     */
-    categoryControllerUpdate(params: CategoryControllerUpdate$Params, context?: HttpContext): Observable<CategoryDto> {
-        return this.categoryControllerUpdate$Response(params, context).pipe(
-            map((r: StrictHttpResponse<CategoryDto>): CategoryDto => r.body),
-        );
-    }
-
-    /** Path part for operation `categoryControllerRemove()` */
-    static readonly CategoryControllerRemovePath = '/api/v1/words/category/{id}';
-
-    /**
-     * This method provides access to the full `HttpResponse`, allowing access to response headers.
-     * To access only the response body, use `categoryControllerRemove()` instead.
-     *
-     * This method doesn't expect any request body.
-     */
-    categoryControllerRemove$Response(
-        params: CategoryControllerRemove$Params,
-        context?: HttpContext,
-    ): Observable<StrictHttpResponse<CategoryDto>> {
-        return categoryControllerRemove(this.http, this.rootUrl, params, context);
-    }
-
-    /**
-     * This method provides access only to the response body.
-     * To access the full response (for headers, for example), `categoryControllerRemove$Response()` instead.
-     *
-     * This method doesn't expect any request body.
-     */
-    categoryControllerRemove(params: CategoryControllerRemove$Params, context?: HttpContext): Observable<CategoryDto> {
-        return this.categoryControllerRemove$Response(params, context).pipe(
-            map((r: StrictHttpResponse<CategoryDto>): CategoryDto => r.body),
-        );
-    }
-
-    /** Path part for operation `categoryControllerFindWordsByCategory()` */
-    static readonly CategoryControllerFindWordsByCategoryPath = '/api/v1/words/category/{id}/list';
-
-    /**
-     * This method provides access to the full `HttpResponse`, allowing access to response headers.
-     * To access only the response body, use `categoryControllerFindWordsByCategory()` instead.
-     *
-     * This method doesn't expect any request body.
-     */
-    categoryControllerFindWordsByCategory$Response(
-        params: CategoryControllerFindWordsByCategory$Params,
-        context?: HttpContext,
-    ): Observable<
-        StrictHttpResponse<
-            PageDto & {
-                data?: Array<CategoryAssociationDto>;
-                meta?: PageMetaDto;
-            }
-        >
-    > {
-        return categoryControllerFindWordsByCategory(this.http, this.rootUrl, params, context);
-    }
-
-    /**
-     * This method provides access only to the response body.
-     * To access the full response (for headers, for example), `categoryControllerFindWordsByCategory$Response()` instead.
-     *
-     * This method doesn't expect any request body.
-     */
-    categoryControllerFindWordsByCategory(
-        params: CategoryControllerFindWordsByCategory$Params,
-        context?: HttpContext,
-    ): Observable<
-        PageDto & {
-            data?: Array<CategoryAssociationDto>;
-            meta?: PageMetaDto;
-        }
-    > {
-        return this.categoryControllerFindWordsByCategory$Response(params, context).pipe(
-            map(
-                (
-                    r: StrictHttpResponse<
-                        PageDto & {
-                            data?: Array<CategoryAssociationDto>;
-                            meta?: PageMetaDto;
-                        }
-                    >,
-                ): PageDto & {
-                    data?: Array<CategoryAssociationDto>;
-                    meta?: PageMetaDto;
-                } => r.body,
-            ),
-        );
-    }
-
     /** Path part for operation `usageControllerCreate()` */
     static readonly UsageControllerCreatePath = '/api/v1/words/usage';
 
@@ -1084,34 +852,266 @@ export class ApiService extends BaseService {
         );
     }
 
-    /** Path part for operation `profileControllerGetUserVocabulary()` */
-    static readonly ProfileControllerGetUserVocabularyPath = '/api/v1/profile';
+    /** Path part for operation `categoryControllerFindBasicCategories()` */
+    static readonly CategoryControllerFindBasicCategoriesPath = '/api/v1/words/category';
 
     /**
      * This method provides access to the full `HttpResponse`, allowing access to response headers.
-     * To access only the response body, use `profileControllerGetUserVocabulary()` instead.
+     * To access only the response body, use `categoryControllerFindBasicCategories()` instead.
      *
      * This method doesn't expect any request body.
      */
-    profileControllerGetUserVocabulary$Response(
-        params?: ProfileControllerGetUserVocabulary$Params,
+    categoryControllerFindBasicCategories$Response(
+        params?: CategoryControllerFindBasicCategories$Params,
         context?: HttpContext,
-    ): Observable<StrictHttpResponse<UserResponse>> {
-        return profileControllerGetUserVocabulary(this.http, this.rootUrl, params, context);
+    ): Observable<StrictHttpResponse<Array<CategoryDto>>> {
+        return categoryControllerFindBasicCategories(this.http, this.rootUrl, params, context);
     }
 
     /**
      * This method provides access only to the response body.
-     * To access the full response (for headers, for example), `profileControllerGetUserVocabulary$Response()` instead.
+     * To access the full response (for headers, for example), `categoryControllerFindBasicCategories$Response()` instead.
      *
      * This method doesn't expect any request body.
      */
-    profileControllerGetUserVocabulary(
-        params?: ProfileControllerGetUserVocabulary$Params,
+    categoryControllerFindBasicCategories(
+        params?: CategoryControllerFindBasicCategories$Params,
         context?: HttpContext,
-    ): Observable<UserResponse> {
-        return this.profileControllerGetUserVocabulary$Response(params, context).pipe(
-            map((r: StrictHttpResponse<UserResponse>): UserResponse => r.body),
+    ): Observable<Array<CategoryDto>> {
+        return this.categoryControllerFindBasicCategories$Response(params, context).pipe(
+            map((r: StrictHttpResponse<Array<CategoryDto>>): Array<CategoryDto> => r.body),
+        );
+    }
+
+    /** Path part for operation `categoryControllerCreate()` */
+    static readonly CategoryControllerCreatePath = '/api/v1/words/category';
+
+    /**
+     * This method provides access to the full `HttpResponse`, allowing access to response headers.
+     * To access only the response body, use `categoryControllerCreate()` instead.
+     *
+     * This method sends `application/json` and handles request body of type `application/json`.
+     */
+    categoryControllerCreate$Response(
+        params: CategoryControllerCreate$Params,
+        context?: HttpContext,
+    ): Observable<StrictHttpResponse<CategoryDto>> {
+        return categoryControllerCreate(this.http, this.rootUrl, params, context);
+    }
+
+    /**
+     * This method provides access only to the response body.
+     * To access the full response (for headers, for example), `categoryControllerCreate$Response()` instead.
+     *
+     * This method sends `application/json` and handles request body of type `application/json`.
+     */
+    categoryControllerCreate(params: CategoryControllerCreate$Params, context?: HttpContext): Observable<CategoryDto> {
+        return this.categoryControllerCreate$Response(params, context).pipe(
+            map((r: StrictHttpResponse<CategoryDto>): CategoryDto => r.body),
+        );
+    }
+
+    /** Path part for operation `categoryControllerFindUserCategories()` */
+    static readonly CategoryControllerFindUserCategoriesPath = '/api/v1/words/category/user';
+
+    /**
+     * This method provides access to the full `HttpResponse`, allowing access to response headers.
+     * To access only the response body, use `categoryControllerFindUserCategories()` instead.
+     *
+     * This method doesn't expect any request body.
+     */
+    categoryControllerFindUserCategories$Response(
+        params?: CategoryControllerFindUserCategories$Params,
+        context?: HttpContext,
+    ): Observable<StrictHttpResponse<Array<CategoryDto>>> {
+        return categoryControllerFindUserCategories(this.http, this.rootUrl, params, context);
+    }
+
+    /**
+     * This method provides access only to the response body.
+     * To access the full response (for headers, for example), `categoryControllerFindUserCategories$Response()` instead.
+     *
+     * This method doesn't expect any request body.
+     */
+    categoryControllerFindUserCategories(
+        params?: CategoryControllerFindUserCategories$Params,
+        context?: HttpContext,
+    ): Observable<Array<CategoryDto>> {
+        return this.categoryControllerFindUserCategories$Response(params, context).pipe(
+            map((r: StrictHttpResponse<Array<CategoryDto>>): Array<CategoryDto> => r.body),
+        );
+    }
+
+    /** Path part for operation `categoryControllerFindOne()` */
+    static readonly CategoryControllerFindOnePath = '/api/v1/words/category/{id}';
+
+    /**
+     * This method provides access to the full `HttpResponse`, allowing access to response headers.
+     * To access only the response body, use `categoryControllerFindOne()` instead.
+     *
+     * This method doesn't expect any request body.
+     */
+    categoryControllerFindOne$Response(
+        params: CategoryControllerFindOne$Params,
+        context?: HttpContext,
+    ): Observable<StrictHttpResponse<CategoryDto>> {
+        return categoryControllerFindOne(this.http, this.rootUrl, params, context);
+    }
+
+    /**
+     * This method provides access only to the response body.
+     * To access the full response (for headers, for example), `categoryControllerFindOne$Response()` instead.
+     *
+     * This method doesn't expect any request body.
+     */
+    categoryControllerFindOne(
+        params: CategoryControllerFindOne$Params,
+        context?: HttpContext,
+    ): Observable<CategoryDto> {
+        return this.categoryControllerFindOne$Response(params, context).pipe(
+            map((r: StrictHttpResponse<CategoryDto>): CategoryDto => r.body),
+        );
+    }
+
+    /** Path part for operation `categoryControllerUpdate()` */
+    static readonly CategoryControllerUpdatePath = '/api/v1/words/category/{id}';
+
+    /**
+     * This method provides access to the full `HttpResponse`, allowing access to response headers.
+     * To access only the response body, use `categoryControllerUpdate()` instead.
+     *
+     * This method sends `application/json` and handles request body of type `application/json`.
+     */
+    categoryControllerUpdate$Response(
+        params: CategoryControllerUpdate$Params,
+        context?: HttpContext,
+    ): Observable<StrictHttpResponse<CategoryDto>> {
+        return categoryControllerUpdate(this.http, this.rootUrl, params, context);
+    }
+
+    /**
+     * This method provides access only to the response body.
+     * To access the full response (for headers, for example), `categoryControllerUpdate$Response()` instead.
+     *
+     * This method sends `application/json` and handles request body of type `application/json`.
+     */
+    categoryControllerUpdate(params: CategoryControllerUpdate$Params, context?: HttpContext): Observable<CategoryDto> {
+        return this.categoryControllerUpdate$Response(params, context).pipe(
+            map((r: StrictHttpResponse<CategoryDto>): CategoryDto => r.body),
+        );
+    }
+
+    /** Path part for operation `categoryControllerRemove()` */
+    static readonly CategoryControllerRemovePath = '/api/v1/words/category/{id}';
+
+    /**
+     * This method provides access to the full `HttpResponse`, allowing access to response headers.
+     * To access only the response body, use `categoryControllerRemove()` instead.
+     *
+     * This method doesn't expect any request body.
+     */
+    categoryControllerRemove$Response(
+        params: CategoryControllerRemove$Params,
+        context?: HttpContext,
+    ): Observable<StrictHttpResponse<CategoryDto>> {
+        return categoryControllerRemove(this.http, this.rootUrl, params, context);
+    }
+
+    /**
+     * This method provides access only to the response body.
+     * To access the full response (for headers, for example), `categoryControllerRemove$Response()` instead.
+     *
+     * This method doesn't expect any request body.
+     */
+    categoryControllerRemove(params: CategoryControllerRemove$Params, context?: HttpContext): Observable<CategoryDto> {
+        return this.categoryControllerRemove$Response(params, context).pipe(
+            map((r: StrictHttpResponse<CategoryDto>): CategoryDto => r.body),
+        );
+    }
+
+    /** Path part for operation `categoryControllerFindWordsByCategory()` */
+    static readonly CategoryControllerFindWordsByCategoryPath = '/api/v1/words/category/{id}/list';
+
+    /**
+     * This method provides access to the full `HttpResponse`, allowing access to response headers.
+     * To access only the response body, use `categoryControllerFindWordsByCategory()` instead.
+     *
+     * This method doesn't expect any request body.
+     */
+    categoryControllerFindWordsByCategory$Response(
+        params: CategoryControllerFindWordsByCategory$Params,
+        context?: HttpContext,
+    ): Observable<
+        StrictHttpResponse<
+            PageDto & {
+                data?: Array<CategoryAssociationDto>;
+                meta?: PageMetaDto;
+            }
+        >
+    > {
+        return categoryControllerFindWordsByCategory(this.http, this.rootUrl, params, context);
+    }
+
+    /**
+     * This method provides access only to the response body.
+     * To access the full response (for headers, for example), `categoryControllerFindWordsByCategory$Response()` instead.
+     *
+     * This method doesn't expect any request body.
+     */
+    categoryControllerFindWordsByCategory(
+        params: CategoryControllerFindWordsByCategory$Params,
+        context?: HttpContext,
+    ): Observable<
+        PageDto & {
+            data?: Array<CategoryAssociationDto>;
+            meta?: PageMetaDto;
+        }
+    > {
+        return this.categoryControllerFindWordsByCategory$Response(params, context).pipe(
+            map(
+                (
+                    r: StrictHttpResponse<
+                        PageDto & {
+                            data?: Array<CategoryAssociationDto>;
+                            meta?: PageMetaDto;
+                        }
+                    >,
+                ): PageDto & {
+                    data?: Array<CategoryAssociationDto>;
+                    meta?: PageMetaDto;
+                } => r.body,
+            ),
+        );
+    }
+
+    /** Path part for operation `profileControllerGetProfileData()` */
+    static readonly ProfileControllerGetProfileDataPath = '/api/v1/profile';
+
+    /**
+     * This method provides access to the full `HttpResponse`, allowing access to response headers.
+     * To access only the response body, use `profileControllerGetProfileData()` instead.
+     *
+     * This method doesn't expect any request body.
+     */
+    profileControllerGetProfileData$Response(
+        params?: ProfileControllerGetProfileData$Params,
+        context?: HttpContext,
+    ): Observable<StrictHttpResponse<ProfileDto>> {
+        return profileControllerGetProfileData(this.http, this.rootUrl, params, context);
+    }
+
+    /**
+     * This method provides access only to the response body.
+     * To access the full response (for headers, for example), `profileControllerGetProfileData$Response()` instead.
+     *
+     * This method doesn't expect any request body.
+     */
+    profileControllerGetProfileData(
+        params?: ProfileControllerGetProfileData$Params,
+        context?: HttpContext,
+    ): Observable<ProfileDto> {
+        return this.profileControllerGetProfileData$Response(params, context).pipe(
+            map((r: StrictHttpResponse<ProfileDto>): ProfileDto => r.body),
         );
     }
 }

@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Observable, map, of, switchMap, tap } from 'rxjs';
+import { Observable, map, switchMap, tap } from 'rxjs';
 import { PostcardComponent } from '@/features/postcard';
 import { ApiService, ImageDto, WordDto } from '@/shared/api/generated';
 import { VocabularyStore } from '@/shared/lib/stores';

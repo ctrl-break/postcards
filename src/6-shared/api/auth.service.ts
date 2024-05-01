@@ -31,8 +31,8 @@ export class AuthService {
         );
     }
 
-    logout() {
-        return this.http.get<unknown>(`${API_AUTH}/logout`);
+    logout(): Observable<string> {
+        return this.http.get<string>(`${API_AUTH}/logout`);
     }
 
     refreshToken(): Observable<{ accessToken: string }> {

@@ -49,6 +49,10 @@ export const VocabularyStore = signalStore(
             const word = await firstValueFrom(apiService.vocabularyControllerRemove(params));
             patchState(store, { vocabulary: [...store.vocabulary().filter((v) => v.id !== word.id)] });
         },
+
+        resetVocabulary() {
+            patchState(store, { vocabulary: [] });
+        },
     })),
     withHooks({
         onInit(store) {

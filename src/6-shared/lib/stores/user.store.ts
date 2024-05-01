@@ -1,13 +1,13 @@
 import { inject } from '@angular/core';
 import { signalStore, withHooks, withMethods, withState, patchState } from '@ngrx/signals';
 import { firstValueFrom } from 'rxjs';
-import { ApiService, UserSettingDto } from '@/shared/api/generated';
+import { ApiService, ProfileDto, UserSettingDto } from '@/shared/api/generated';
 
 export interface UserState {
     isInited: boolean;
     isSignedIn: boolean;
     isAdmin: boolean;
-    profile: unknown;
+    profile: ProfileDto | null;
     userSettings: UserSettingDto | null;
 }
 
@@ -24,9 +24,13 @@ export const UserStore = signalStore(
     withState(initialState),
     withMethods((store, apiService = inject(ApiService)) => ({
         initProfile() {
-            return firstValueFrom(apiService.profileControllerGetUserVocabulary()).then((user) => {
+            return firstValueFrom(apiService.profileControllerGetProfileData()).then((user) => {
                 patchState(store, { profile: user, isInited: true });
             });
+        },
+
+        resetProfile() {
+            return patchState(store, { ...initialState });
         },
     })),
     withHooks({
