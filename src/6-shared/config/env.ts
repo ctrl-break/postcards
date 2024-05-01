@@ -1,3 +1,3 @@
 export const env = {
-    api: 'http://localhost:3000',
+    api: 'http://89.111.141.30:3000',
 };
