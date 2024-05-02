@@ -1,6 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, DestroyRef, inject } from '@angular/core';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
 import { AuthService } from '@/shared/api/auth.service';
@@ -20,7 +19,6 @@ export class ProfileDataComponent {
     private authService = inject(AuthService);
     private router = inject(Router);
     private vocabularyStore = inject(VocabularyStore);
-    private destroyRef = inject(DestroyRef);
     private cookieService = inject(CookieService);
 
     isRunningLogout = false;
