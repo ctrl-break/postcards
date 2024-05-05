@@ -1,12 +1,13 @@
 :host {
     display: block;
     max-width: 740px;
-    min-width: 300px;
-    width: 70%;
+    min-width: 330px;
     margin: 0 auto;
 }
 
-.back_arrow {
+.actions {
+    display: flex;
+    gap: 8px;
     margin-bottom: 20px;
 }
 
@@ -179,6 +180,21 @@
                     justify-content: center;
                     align-items: flex-end;
                 }
+            }
+        }
+    }
+
+    &.mobile .border {
+        .word_wrapper {
+            flex-direction: column-reverse;
+            .left_column {
+                border-right: none;
+                padding-right: 0;
+                margin-top: 20px;
+            }
+
+            .right_column {
+                padding-left: 0;
             }
         }
     }

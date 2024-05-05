@@ -3,6 +3,8 @@ import { ChangeDetectionStrategy, Component, Input, inject } from '@angular/core
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { ImageDto, WordDto } from '@/shared/api/generated';
+import { MediaService } from '@/shared/lib/providers';
+import { VocabularyStore } from '@/shared/lib/stores';
 
 @Component({
     selector: 'app-postcard',
@@ -15,12 +17,23 @@ import { ImageDto, WordDto } from '@/shared/api/generated';
 export class PostcardComponent {
     @Input() word!: WordDto;
     @Input() wordImage?: ImageDto | null;
+    @Input() isVocabulary?: boolean | null;
 
     private location = inject(Location);
+    mediaService = inject(MediaService);
+    vocabularyStore = inject(VocabularyStore);
 
     flipped = false;
 
     goBack() {
         this.location.back();
+    }
+
+    toggleVocabulary() {
+        if (this.isVocabulary) {
+            this.vocabularyStore.removeFromVocabulary(this.word.id);
+        } else {
+            this.vocabularyStore.addToVocabulary(this.word.id);
+        }
     }
 }

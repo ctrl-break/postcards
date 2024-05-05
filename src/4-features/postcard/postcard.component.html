@@ -1,8 +1,12 @@
 <!-- eslint-disable @angular-eslint/template/interactive-supports-focus -->
 <!-- eslint-disable @angular-eslint/template/click-events-have-key-events -->
 
-<div class="back_arrow">
+<div class="actions">
     <button mat-fab color="primary" (click)="goBack()"><mat-icon>arrow_back</mat-icon></button>
+    <!-- <button mat-fab color="primary" (click)="toggleVocabulary()">
+        <mat-icon *ngIf="isVocabulary">remove</mat-icon>
+        <mat-icon *ngIf="!isVocabulary">bookmark_add</mat-icon>
+    </button> -->
 </div>
 
 <div class="postcard_wrapper" (click)="flipped = !flipped" [ngClass]="{ flipped: flipped }">
@@ -14,7 +18,7 @@
         </div>
     </div>
 
-    <div class="postcard">
+    <div class="postcard" [ngClass]="{ mobile: mediaService.isMobile() }">
         <div class="border">
             <div class="word_wrapper dark-text">
                 <div class="left_column">
