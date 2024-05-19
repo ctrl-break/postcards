@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { Observable, map, switchMap, tap } from 'rxjs';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Observable, catchError, map, of, switchMap, tap } from 'rxjs';
 import { PostcardComponent } from '@/features/postcard';
 import { ApiService, ImageDto, WordDto } from '@/shared/api/generated';
 import { VocabularyStore } from '@/shared/lib/stores';
@@ -17,23 +17,43 @@ import { VocabularyStore } from '@/shared/lib/stores';
 export class WordCardComponent {
     apiService = inject(ApiService);
     route = inject(ActivatedRoute);
+    router = inject(Router);
     vocabularyStore = inject(VocabularyStore);
 
-    isVocabulary: boolean = false;
+    isVocabularyRoute: boolean = false;
+    wordId?: string;
+    isVocabulary = false;
 
     wordId$ = this.route.data.pipe(
         tap((res) => {
-            if (res?.['type'] === 'vocabulary') {
-                this.isVocabulary = true;
-            }
+            this.isVocabularyRoute = res?.['type'] === 'vocabulary';
         }),
         switchMap(() => this.route.params.pipe(map(({ id }) => id))),
+        tap((id) => (this.wordId = id)),
+        tap(() => {
+            this.isVocabulary = !!this.vocabularyStore
+                .wordIds()
+                .find((voc) =>
+                    this.isVocabularyRoute
+                        ? voc.vocabularyId?.toString() === this.wordId
+                        : voc.wordId?.toString() === this.wordId,
+                );
+        }),
     );
-    word$: Observable<WordDto> = this.wordId$.pipe(switchMap((id) => this.getWord(id)));
+    word$: Observable<WordDto> = this.wordId$.pipe(
+        switchMap((id) => this.getWord(id)),
+        catchError((err) => {
+            console.error(err);
+            if (err.status === 404) {
+                this.router.navigate(['/cards']);
+            }
+            return of();
+        }),
+    );
     wordImage$ = this.wordId$.pipe(switchMap((id) => this.updateWordImage(id)));
 
     getWord = (id: string): Observable<WordDto> =>
-        this.isVocabulary
+        this.isVocabularyRoute
             ? this.apiService.vocabularyControllerFindOne({ id }).pipe(
                   map((voc) => ({
                       ...voc.word!,
@@ -41,45 +61,20 @@ export class WordCardComponent {
               )
             : this.apiService.wordControllerFindOne({ id });
 
+    getWordIdFromVocabulary(id: string): string {
+        return (
+            this.vocabularyStore
+                .wordIds()
+                .find((voc) => voc.vocabularyId.toString() === id)
+                ?.wordId?.toString() ?? ''
+        );
+    }
+
     updateWordImage = (id: string): Observable<ImageDto | null> => {
-        if (this.isVocabulary) {
-            const wordId = this.vocabularyStore.wordIds().find((voc) => voc.vocabularyId.toString() === id)?.wordId;
-            return this.apiService.wordControllerFindOneAndUpdateImage({ id: wordId!.toString() });
+        if (this.isVocabularyRoute) {
+            const wordId = this.getWordIdFromVocabulary(id);
+            return this.apiService.wordControllerFindOneAndUpdateImage({ id: wordId });
         }
         return this.apiService.wordControllerFindOneAndUpdateImage({ id });
     };
 }
-
-/*
-    createdAt: string;
-    id: number;
-    imageId?: number;
-    meaning?: string;
-    transcription?: string;
-    translation?: string;
-    updatedAt: string;
-    userId: number;
-    userWord: string;
-    word?: WordDto;
-    wordId?: number;
-
-    context?: string;
-    defaultImage?: ImageDto;
-    defaultImageId?: number;
-    id: number;
-    isVisible: boolean;
-    meaning?: string;
-    pos?: PartOfSpeech;
-    transcription?: string;
-    translateVariants: {
-        [key: string]: any;
-    };
-    translation: string;
-    usages?: Array<WordUsageDto>;
-    word: string;
-
-
-}
-
-
-*/

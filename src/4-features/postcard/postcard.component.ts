@@ -35,5 +35,6 @@ export class PostcardComponent {
         } else {
             this.vocabularyStore.addToVocabulary(this.word.id);
         }
+        this.isVocabulary = !this.isVocabulary;
     }
 }
