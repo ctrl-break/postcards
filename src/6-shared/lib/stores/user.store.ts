@@ -1,4 +1,5 @@
 import { inject } from '@angular/core';
+import { withDevtools } from '@angular-architects/ngrx-toolkit';
 import { signalStore, withHooks, withMethods, withState, patchState } from '@ngrx/signals';
 import { firstValueFrom } from 'rxjs';
 import { ApiService, ProfileDto, UserSettingDto } from '@/shared/api/generated';
@@ -8,7 +9,7 @@ export interface UserState {
     isSignedIn: boolean;
     isAdmin: boolean;
     profile: ProfileDto | null;
-    userSettings: UserSettingDto | null;
+    userSettings: UserSettingDto[] | null;
 }
 
 const initialState: UserState = {
@@ -22,11 +23,12 @@ const initialState: UserState = {
 export const UserStore = signalStore(
     { providedIn: 'root' },
     withState(initialState),
+    withDevtools('user'),
     withMethods((store, apiService = inject(ApiService)) => ({
-        initProfile() {
-            return firstValueFrom(apiService.profileControllerGetProfileData()).then((user) => {
-                patchState(store, { profile: user, isInited: true });
-            });
+        async initProfile() {
+            const user = await firstValueFrom(apiService.profileControllerGetProfileData());
+            const settings = await firstValueFrom(apiService.settingsControllerGetUserSettings());
+            patchState(store, { profile: user, userSettings: settings, isInited: true });
         },
 
         resetProfile() {

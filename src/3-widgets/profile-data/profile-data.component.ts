@@ -23,6 +23,10 @@ export class ProfileDataComponent {
 
     isRunningLogout = false;
 
+    goToSettings() {
+        this.router.navigateByUrl('/settings');
+    }
+
     logout() {
         if (this.isRunningLogout) {
             return;

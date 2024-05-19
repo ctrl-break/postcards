@@ -20,6 +20,7 @@ export { UpdateUsageDto } from './models/update-usage-dto';
 export { UpdateVocabularyDto } from './models/update-vocabulary-dto';
 export { UpdateWordDto } from './models/update-word-dto';
 export { UserSettingDto } from './models/user-setting-dto';
+export { ValueType } from './models/value-type';
 export { VocabularyDto } from './models/vocabulary-dto';
 export { WordDto } from './models/word-dto';
 export { WordUsageDto } from './models/word-usage-dto';

@@ -1,5 +1,5 @@
 <div class="app" [ngClass]="themeService.themeSignal()">
-    @if (init$ | async) {
+    @if ((init$ | async) === true) {
         <router-outlet />
     } @else if (isStoresLoaded) {
         <router-outlet />

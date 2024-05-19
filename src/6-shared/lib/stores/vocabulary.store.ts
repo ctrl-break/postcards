@@ -1,4 +1,5 @@
 import { computed, inject } from '@angular/core';
+import { withDevtools } from '@angular-architects/ngrx-toolkit';
 import { signalStore, withHooks, withMethods, withState, patchState, withComputed } from '@ngrx/signals';
 import { firstValueFrom } from 'rxjs';
 import { ApiService, VocabularyDto } from '@/shared/api/generated';
@@ -17,6 +18,7 @@ const initialState: VocabularyState = {
 export const VocabularyStore = signalStore(
     { providedIn: 'root' },
     withState(initialState),
+    withDevtools('vocabulary'),
     withComputed(({ vocabulary }) => ({
         wordIds: computed(() =>
             vocabulary()

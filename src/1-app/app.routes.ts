@@ -3,6 +3,7 @@ import { CardsComponent } from '@/pages/cards/cards.component';
 import { CategoriesComponent } from '@/pages/categories/categories.component';
 import { MainComponent } from '@/pages/main/main.component';
 import { ProfileComponent } from '@/pages/profile/profile.component';
+import { SettingsComponent } from '@/pages/settings/settings.component';
 import { SigninComponent } from '@/pages/signin/signin.component';
 import { WordComponent } from '@/pages/word/word.component';
 import { WordsComponent } from '@/pages/words/words.component';
@@ -51,6 +52,11 @@ export const routes: Routes = [
     {
         path: 'profile',
         component: ProfileComponent,
+        canActivate: [userGuard],
+    },
+    {
+        path: 'settings',
+        component: SettingsComponent,
         canActivate: [userGuard],
     },
 ];
