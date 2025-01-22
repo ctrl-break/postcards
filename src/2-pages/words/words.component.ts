@@ -4,10 +4,9 @@ import { LayoutComponent } from '../layout';
 
 @Component({
     selector: 'app-words',
-    standalone: true,
     imports: [LayoutComponent, WordsListComponent],
     templateUrl: './words.component.html',
     styleUrl: './words.component.scss',
-    changeDetection: ChangeDetectionStrategy.OnPush,
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class WordsComponent {}

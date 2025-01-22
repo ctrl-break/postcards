@@ -10,10 +10,9 @@ import { UserStore, VocabularyStore } from '@/shared/lib/stores';
 
 @Component({
     selector: 'app-root',
-    standalone: true,
     imports: [CommonModule, RouterOutlet, MatSidenavModule, InitialLoaderComponent],
     templateUrl: './app.component.html',
-    styleUrl: './app.component.scss',
+    styleUrl: './app.component.scss'
 })
 export class AppComponent {
     isStoresLoaded = false;

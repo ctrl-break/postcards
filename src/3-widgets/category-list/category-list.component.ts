@@ -5,11 +5,10 @@ import { ApiService } from '@/shared/api/generated';
 
 @Component({
     selector: 'app-category-list',
-    standalone: true,
     imports: [CommonModule, CategoryComponent],
     templateUrl: './category-list.component.html',
     styleUrl: './category-list.component.scss',
-    changeDetection: ChangeDetectionStrategy.OnPush,
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CategoryListComponent {
     apiService = inject(ApiService);

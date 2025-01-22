@@ -8,11 +8,10 @@ import { MatForms } from '@/shared/ui/mat-forms';
 
 @Component({
     selector: 'app-profile-data',
-    standalone: true,
     imports: [CommonModule, MatForms],
     templateUrl: './profile-data.component.html',
     styleUrl: './profile-data.component.scss',
-    changeDetection: ChangeDetectionStrategy.OnPush,
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ProfileDataComponent {
     userStore = inject(UserStore);

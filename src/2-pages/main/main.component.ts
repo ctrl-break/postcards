@@ -7,10 +7,9 @@ import { LayoutComponent } from '../layout';
 
 @Component({
     selector: 'app-main',
-    standalone: true,
     imports: [CommonModule, LayoutComponent, MatButtonModule, MatDividerModule, MatIconModule],
     templateUrl: './main.component.html',
     styleUrl: './main.component.scss',
-    changeDetection: ChangeDetectionStrategy.OnPush,
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class MainComponent {}

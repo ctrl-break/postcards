@@ -4,10 +4,9 @@ import { HeaderComponent } from '@/widgets/header';
 
 @Component({
     selector: 'app-layout',
-    standalone: true,
     imports: [CommonModule, HeaderComponent],
     templateUrl: './layout.component.html',
     styleUrl: './layout.component.scss',
-    changeDetection: ChangeDetectionStrategy.OnPush,
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class LayoutComponent {}

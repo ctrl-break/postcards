@@ -6,11 +6,10 @@ import { LayoutComponent } from '../layout';
 
 @Component({
     selector: 'app-cards',
-    standalone: true,
     imports: [CommonModule, LayoutComponent, WordsListItemComponent],
     templateUrl: './cards.component.html',
     styleUrl: './cards.component.scss',
-    changeDetection: ChangeDetectionStrategy.OnPush,
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CardsComponent {
     vocabularyStore = inject(VocabularyStore);

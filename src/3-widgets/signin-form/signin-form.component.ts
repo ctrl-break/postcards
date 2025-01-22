@@ -8,10 +8,9 @@ import { MatForms } from '@/shared/ui/mat-forms';
 
 @Component({
     selector: 'app-signin-form',
-    standalone: true,
     imports: [MatForms],
     templateUrl: './signin-form.component.html',
-    styleUrl: './signin-form.component.scss',
+    styleUrl: './signin-form.component.scss'
 })
 export class SigninFormComponent {
     private authService = inject(AuthService);
