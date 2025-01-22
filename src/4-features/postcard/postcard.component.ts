@@ -8,11 +8,10 @@ import { VocabularyStore } from '@/shared/lib/stores';
 
 @Component({
     selector: 'app-postcard',
-    standalone: true,
     imports: [CommonModule, MatButtonModule, MatIconModule],
     templateUrl: './postcard.component.html',
     styleUrl: './postcard.component.scss',
-    changeDetection: ChangeDetectionStrategy.OnPush,
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PostcardComponent {
     @Input() word!: WordDto;

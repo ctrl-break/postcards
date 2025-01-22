@@ -1,76 +1,53 @@
 @use '@angular/material' as mat;
-@use '@angular/material-experimental' as matx;
-
-$dark-theme: matx.define-theme(
-    (
-        color: (
-            theme-type: dark,
-            primary: matx.$m3-cyan-palette,
-            tertiary: matx.$m3-orange-palette,
-        ),
-    )
-);
-
-$light-theme-primary: mat.define-palette(mat.$indigo-palette);
-$light-theme-accent: mat.define-palette(mat.$pink-palette, A200, A100, A400);
-$light-theme-warn: mat.define-palette(mat.$red-palette);
-$light-theme: mat.define-light-theme(
-    (
-        color: (
-            primary: $light-theme-primary,
-            accent: $light-theme-accent,
-            warn: $light-theme-warn,
-        ),
-        typography: mat.define-typography-config(),
-    )
-);
 
 // Dark theme variables
-$dark-bg-color: #004f4f;
+$dark-bg-color: #121317;
 $semi-dark-bg-color: #333;
 $light-text-color: #cacaca;
 // Light theme variables
-$light-bg-color: #fff;
+$light-bg-color: #fffafa;
 $semi-light-bg-color: #c0c0c0;
 $dark-text-color: #333;
 
-@include mat.core();
-@include matx.color-variants-back-compat($dark-theme);
 
 html {
-    @include mat.all-component-themes($dark-theme);
 
-    .dark-theme {
-        background-color: $semi-dark-bg-color;
-        color: $light-text-color;
-
-        .primary-bg {
-            background-color: $dark-bg-color;
-        }
-
-        .router-link-active {
-            // border: 1px solid currentColor;
-            background-color: mat.get-theme-color($dark-theme, primary, 20);
-        }
-
-        a {
-            color: mat.get-theme-color($dark-theme, primary, 80);
-        }
+    a {
+        color: #005cbb;
     }
+
+    @include mat.theme((
+        color: (
+          primary: mat.$azure-palette,
+          theme-type: light,
+        ),
+        typography: Roboto,
+        density: 0
+      ));
 
     .light-theme {
-        @include mat.all-component-colors($light-theme);
-
         background-color: $light-bg-color;
-
-        .router-link-active {
-            background-color: mat.get-theme-color($light-theme, primary, 400);
-        }
-
-        a {
-            color: mat.get-theme-color($light-theme, primary, 10);
-        }
+        color: $dark-text-color;
+        @include mat.toolbar-overrides((
+            container-background-color: #dbe4fa,
+        ));
     }
+
+    .dark-theme {
+        color-scheme: dark;
+        background-color: $dark-bg-color;
+        color: $light-text-color;
+        @include mat.theme((
+            color: (
+                primary: mat.$cyan-palette,
+                tertiary: mat.$orange-palette,
+              ),
+        ));
+        @include mat.toolbar-overrides((
+            container-background-color: #1a1c20,
+        ));
+    }
+
 
     .dark-text {
         color: $dark-text-color;
@@ -80,3 +57,77 @@ html {
         color: $light-text-color;
     }
 }
+
+
+
+// $dark-theme: mat.define-theme(
+//     (
+//         color: (
+//             theme-type: dark,
+//             primary: mat.$cyan-palette,
+//             tertiary: mat.$orange-palette,
+//         ),
+//     )
+// );
+
+// $light-theme-primary: mat.$violet-palette;
+// $light-theme-accent: mat.$rose-palette;
+// $light-theme-warn: mat.$red-palette;
+// $light-theme: mat.m2-define-light-theme(
+//     (
+//         color: (
+//             primary: $light-theme-primary,
+//             accent: $light-theme-accent,
+//             warn: $light-theme-warn,
+//         ),
+//         typography: mat.m2-define-typography-config(),
+//     )
+// );
+
+
+// // @include mat.core();
+// // @include matx.color-variants-back-compat($dark-theme);
+
+// html {
+//     @include mat.all-component-themes($dark-theme);
+
+//     .dark-theme {
+//         background-color: $semi-dark-bg-color;
+//         color: $light-text-color;
+
+//         .primary-bg {
+//             background-color: $dark-bg-color;
+//         }
+
+//         .router-link-active {
+//             // border: 1px solid currentColor;
+//             background-color: mat.get-theme-color($dark-theme, primary, 20);
+//         }
+
+//         a {
+//             color: mat.get-theme-color($dark-theme, primary, 80);
+//         }
+//     }
+
+//     .light-theme {
+//         @include mat.all-component-colors($light-theme);
+
+//         background-color: $light-bg-color;
+
+//         .router-link-active {
+//             background-color: mat.get-theme-color($light-theme, primary, 400);
+//         }
+
+//         a {
+//             color: mat.get-theme-color($light-theme, primary, 10);
+//         }
+//     }
+
+//     .dark-text {
+//         color: $dark-text-color;
+//     }
+
+//     .light-text {
+//         color: $light-text-color;
+//     }
+// }

@@ -9,10 +9,9 @@ import { MediaService, ThemeService } from '@/shared/lib/providers';
 
 @Component({
     selector: 'app-header',
-    standalone: true,
     imports: [CommonModule, RouterLink, MatToolbarModule, MatButtonModule, MatIconModule, NavComponent],
     templateUrl: './header.component.html',
-    styleUrl: './header.component.scss',
+    styleUrl: './header.component.scss'
 })
 export class HeaderComponent {
     themeService = inject(ThemeService);

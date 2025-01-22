@@ -13,11 +13,10 @@ import { InfiniteScrollDirective } from '@/shared/ui/infinitive-scroll';
 
 @Component({
     selector: 'app-words-list',
-    standalone: true,
     imports: [CommonModule, WordsListItemComponent, InfiniteScrollDirective, MatProgressBarModule],
     templateUrl: './words-list.component.html',
     styleUrl: './words-list.component.scss',
-    changeDetection: ChangeDetectionStrategy.OnPush,
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class WordsListComponent {
     apiService = inject(ApiService);

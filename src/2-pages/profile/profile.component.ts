@@ -4,10 +4,9 @@ import { LayoutComponent } from '../layout';
 
 @Component({
     selector: 'app-profile',
-    standalone: true,
     imports: [LayoutComponent, ProfileDataComponent],
     templateUrl: './profile.component.html',
     styleUrl: './profile.component.scss',
-    changeDetection: ChangeDetectionStrategy.OnPush,
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ProfileComponent {}

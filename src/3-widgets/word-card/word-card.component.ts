@@ -8,11 +8,10 @@ import { VocabularyStore } from '@/shared/lib/stores';
 
 @Component({
     selector: 'app-word-card',
-    standalone: true,
     imports: [CommonModule, PostcardComponent],
     templateUrl: './word-card.component.html',
     styleUrl: './word-card.component.scss',
-    changeDetection: ChangeDetectionStrategy.OnPush,
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class WordCardComponent {
     apiService = inject(ApiService);
